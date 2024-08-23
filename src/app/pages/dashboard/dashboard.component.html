@@ -1,0 +1,56 @@
+<main class="main">
+        	
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="dashboard">
+            <div class="container-fluid logout-btn">
+                <button class="btn btn-danger" (click)="logout()">Logout</button>
+            </div>            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="myaccounts">
+                         <a routerLink="/myprofile">
+                            <h4>My Profile</h4>
+                            <p>Edit personal info, change password</p>
+                         </a>
+                        </div> 
+                    </div>
+                    <div class="col-md-3">
+                        <div class="myaccounts">
+                         <a routerLink="/myorder">
+                            <h4>My Order</h4>
+                            <p>View, modify and track orders</p>
+                         </a>
+                        </div> 
+                    </div>
+                    <!-- <div class="col-md-3">
+                        <div class="myaccounts">
+                         <a routerLink="/mypayments">
+                            <h4>My Payment</h4>
+                            <p>View and modify payment methods</p>
+                         </a>
+                        </div> 
+                    </div> -->
+                    <div class="col-md-3">
+                        <div class="myaccounts">
+                         <a routerLink="/myaddress">
+                            <h4>My Address </h4>
+                            <p> Edit, add or remove addresses</p>
+                         </a>
+                        </div> 
+                    </div>
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

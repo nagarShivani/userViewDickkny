@@ -1,0 +1,525 @@
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container-fluid d-flex align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+                <li class="breadcrumb-item"><a >Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{productDetails?.name}}</li>
+            </ol>
+
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container-fluid mt-4">
+            <div class="product-details-top ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="product-gallery product-gallery-vertical">
+                            <div class="row">
+                                <figure class="product-main-image">
+                                    <img id="product-zoom" src="{{productDetails?.image}}"
+                                        data-zoom-image="assets/images/jea2.webp" alt="product image">
+                                        <!-- <img id="product-zoom" src="{{productDetails.image}}"
+                                        data-zoom-image="assets/images/jea2.webp" alt="product image"> -->
+                                    <!-- <a  id="btn-product-gallery" class="btn-product-gallery">
+                                        <i class="icon-arrows"></i>
+                                    </a> -->
+                                </figure><!-- End .product-main-image -->
+
+                                <div *ngIf="productDetails?.multipleimage?.length > 0" id="product-zoom-gallery" class="product-image-gallery">
+                                    <a *ngFor="let images of productDetails.multipleimage" class="product-gallery-item active"  data-image="assets/images/jea2.webp"
+                                        data-zoom-image="assets/images/jea2.webp">
+                                        <img src="{{images}}" alt="product side">
+                                    </a>
+                                </div><!-- End .product-image-gallery -->
+                            </div><!-- End .row -->
+                        </div><!-- End .product-gallery -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h1 *ngIf="productDetails?.brandId?.name" class="product-title">{{productDetails?.brandId?.name}}</h1><!-- End .product-title -->
+                            <h1 class="product-title">{{productDetails?.name}}</h1><!-- End .product-title -->
+
+                            <!-- <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 80%;"></div>
+                                </div>
+                                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                            </div> -->
+                            <div class="product-price">
+                                ₹{{productDetails?.price}}
+                            </div><!-- End .product-price -->
+
+                            <div class="product-content">
+                                <p>{{productDetails?.description}}</p>
+                            </div><!-- End .product-content -->
+
+                            <!-- <div class="details-filter-row details-row-size">
+                                <label>Color:</label>
+
+                                <div class="product-nav product-nav-thumbs">
+                                    <a  class="active">
+                                        <img src="assets/images/jeansi.svg" alt="product desc">
+                                    </a>
+                                    <a >
+                                        <img src="assets/images/jeansi3.svg" alt="product desc">
+                                    </a>
+                                </div>
+                            </div> -->
+
+                            <div class="details-filter-row details-row-size">
+                                <label for="size">Size:</label>
+                                <div *ngIf="productDetails?.size?.length > 0" class="product-nav product-nav-thumbs">
+                                    <div *ngFor="let productSize of productDetails.size" class="size-button" [ngClass]="{ 'active': productSize === selectedSize }">
+                                        <button (click)="selectSize(productSize)">{{ productSize.size }}</button>
+                                    </div>
+                                </div>
+                                <!-- <div *ngIf="productDetails.size.length > 0" class="select-custom">
+                                    <select name="size" id="size" class="form-control">
+                                        <option value="#" selected="selected">Select a size</option>
+                                        <option *ngFor="let size of productDetails.size" value="{{size.size}}">{{size.size}}</option>
+                                        <option value="m">Medium</option>
+                                        <option value="l">Large</option>
+                                        <option value="xl">Extra Large</option>
+                                    </select>
+                                </div> -->
+                                <button type="button" class="size-guide " data-toggle="modal"
+                                    data-target="#exampleModal"><i class="icon-th-list"></i>size guide</button>
+                            </div><!-- End .details-filter-row -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Size Guard</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="icon-close"></i></span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table cellspacing="0" border="1" class="table">
+                                                <thead class="bg-dark text-white">
+                                                    <tr>
+                                                        <td>Size</td>
+                                                        <td>15.5</td>
+                                                        <td>16</td>
+                                                        <td>16.5</td>
+                                                        <td>17</td>
+                                                        <td>17.5</td>
+                                                        <td>18</td>
+                                                        <td>18.5</td>
+                                                        <td>19</td>
+                                                        <td>19.5</td>
+                                                        <td>20</td>
+                                                        <td>20.5</td>
+                                                        <td>21</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>CHEST (ins)</td>
+                                                        <td>40</td>
+                                                        <td>42</td>
+                                                        <td>44</td>
+                                                        <td>46</td>
+                                                        <td>48</td>
+                                                        <td>50</td>
+                                                        <td>52</td>
+                                                        <td>54</td>
+                                                        <td>56</td>
+                                                        <td>58</td>
+                                                        <td>60</td>
+                                                        <td>62</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>EURO (CM)</td>
+                                                        <td>102</td>
+                                                        <td>107</td>
+                                                        <td>112</td>
+                                                        <td>117</td>
+                                                        <td>122</td>
+                                                        <td>127</td>
+                                                        <td>132</td>
+                                                        <td>137</td>
+                                                        <td>142</td>
+                                                        <td>147</td>
+                                                        <td>152</td>
+                                                        <td>157</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-filter-row details-row-size">
+                                <label for="qty">Qty:</label>
+                                <div class="product-details-quantity">
+                                    <input type="number" id="qty" class="form-control" [(ngModel)]="quantity" name="quantity" min="1" max="10" step="1" required>
+                                </div>
+                            </div>
+
+                            <div class="product-details-action cursor-pointer">
+                                <a (click)="addToCart(productDetails._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+
+                                <div class="details-action-wrapper cursor-pointer">
+                                    <a (click)="addToWishlist(productDetails._id)" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                            Wishlist</span></a>
+                                </div><!-- End .details-action-wrapper -->
+                            </div><!-- End .product-details-action -->
+
+                            <div class="product-details-footer">
+                                <div *ngIf="productDetails?.categoryId?.length > 0" class="product-cat">
+                                    <span>Category:</span>
+                                    <a *ngFor="let category of productDetails.categoryId">{{category.name}}</a><span *ngIf="productDetails.categoryId.length > 1" > ,</span>
+                                </div>
+
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label">Share:</span>
+                                    <a  class="social-icon" title="Facebook" target="_blank"><i
+                                            class="icon-facebook-f"></i></a>
+                                    <a  class="social-icon" title="Twitter" target="_blank"><i
+                                            class="icon-twitter"></i></a>
+                                    <a  class="social-icon" title="Instagram" target="_blank"><i
+                                            class="icon-instagram"></i></a>
+                                    <a  class="social-icon" title="Pinterest" target="_blank"><i
+                                            class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
+                        </div><!-- End .product-details -->
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .product-details-top -->
+
+            <div class="product-details-tab">
+                <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a *ngIf="productDetails?.productInformation" class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
+                            role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="productDetails?.additionalInformation" class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab"
+                            aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab"
+                            role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab"
+                            role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div *ngIf="productDetails?.productInformation" class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+                        aria-labelledby="product-desc-link">
+                        <div class="product-desc-content">
+                            <h3>Product Information</h3>
+                            <p>{{productDetails.productInformation}}</p>
+                            <!-- <ul>
+                                <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
+                                <li>Vivamus finibus vel mauris ut vehicula.</li>
+                                <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
+                            </ul>
+
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+                                mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper
+                                suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam
+                                porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices
+                                nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique
+                                cursus. </p> -->
+                        </div>
+                    </div><!-- .End .tab-pane -->
+                    <div *ngIf="productDetails?.additionalInformation" class="tab-pane fade" id="product-info-tab" role="tabpanel"
+                        aria-labelledby="product-info-link">
+                        <div class="product-desc-content">
+                            <h3>Information</h3>
+                            <p>{{productDetails.additionalInformation}}</p>
+
+                            <!-- <h3>Fabric & care</h3>
+                            <ul>
+                                <li>Faux suede fabric</li>
+                                <li>Gold tone metal hoop handles.</li>
+                                <li>RI branding</li>
+                                <li>Snake print trim interior </li>
+                                <li>Adjustable cross body strap</li>
+                                <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+                            </ul>
+
+                            <h3>Size</h3>
+                            <p>one size</p> -->
+                        </div>
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+                        aria-labelledby="product-shipping-link">
+                        <div class="product-desc-content">
+                            <h3>Delivery & returns</h3>
+                            <p>We deliver to over 100 countries around the world. For full details of the delivery
+                                options we offer, please view our <a >Delivery information</a><br>
+                                We hope you’ll love every purchase, but if you ever need to return an item you can do so
+                                within a month of receipt. For full details of how to make a return, please view our <a
+                                    >Returns information</a></p>
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
+                        aria-labelledby="product-review-link">
+                        <div class="reviews">
+                            <h3>Reviews (2)</h3>
+                            <div class="review">
+                                <div class="row no-gutters">
+                                    <div class="col-auto">
+                                        <h4><a >Samanta J.</a></h4>
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 80%;"></div>
+                                                <!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                        </div><!-- End .rating-container -->
+                                        <span class="review-date">6 days ago</span>
+                                    </div><!-- End .col -->
+                                    <div class="col">
+                                        <h4>Good, perfect size</h4>
+
+                                        <div class="review-content">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum
+                                                dolores assumenda asperiores facilis porro reprehenderit animi culpa
+                                                atque blanditiis commodi perspiciatis doloremque, possimus, explicabo,
+                                                autem fugit beatae quae voluptas!</p>
+                                        </div><!-- End .review-content -->
+
+                                        <div class="review-action">
+                                            <a ><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                            <a ><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                        </div><!-- End .review-action -->
+                                    </div><!-- End .col-auto -->
+                                </div><!-- End .row -->
+                            </div><!-- End .review -->
+
+                            <div class="review">
+                                <div class="row no-gutters">
+                                    <div class="col-auto">
+                                        <h4><a >John Doe</a></h4>
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 100%;"></div>
+                                                <!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                        </div><!-- End .rating-container -->
+                                        <span class="review-date">5 days ago</span>
+                                    </div><!-- End .col -->
+                                    <div class="col">
+                                        <h4>Very good</h4>
+
+                                        <div class="review-content">
+                                            <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis
+                                                laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi,
+                                                quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
+                                        </div><!-- End .review-content -->
+
+                                        <div class="review-action">
+                                            <a ><i class="icon-thumbs-up"></i>Helpful (0)</a>
+                                            <a ><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                        </div><!-- End .review-action -->
+                                    </div><!-- End .col-auto -->
+                                </div><!-- End .row -->
+                            </div><!-- End .review -->
+                        </div><!-- End .reviews -->
+                    </div><!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .product-details-tab -->
+
+            <h2 class="title text-center mb-4">Related Products</h2>
+
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                data-owl-options='{
+                    "nav": false, 
+                    "dots": true,
+                    "margin": 20,
+                    "loop": false,
+                    "responsive": {
+                        "0": {
+                            "items":1
+                        },
+                        "480": {
+                            "items":2
+                        },
+                        "768": {
+                            "items":3
+                        },
+                        "992": {
+                            "items":4
+                        },
+                        "1200": {
+                            "items":4,
+                            "nav": true,
+                            "dots": false
+                        }
+                    }
+                }'>
+                <div class="product product-7 text-center">
+                    <figure class="product-media">
+                        <span *ngIf="getAllProducts[0]?.tag" class="product-label label-new">{{getAllProducts[0].tag}}</span>
+                        <a routerLink="/product/{{getAllProducts[0]._id}}">
+                            <img src="{{getAllProducts[0].image}}" alt="Product image" class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a (click)="addToWishlist(getAllProducts[0]._id)" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+
+                        </div>
+
+                        <div class="product-action">
+                            <a (click)="addToCart(getAllProducts[0]._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div>
+                    </figure>
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a >{{getAllProducts[0]?.categoryId?.name}}</a>
+                        </div>
+                        <h3 class="product-title"><a routerLink="/product/{{getAllProducts[0]._id}}">{{getAllProducts[0].name}}</a></h3>
+                        <div class="product-price">
+                            ₹ {{getAllProducts[0].salePrice}}
+                        </div>
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div>
+                            </div>
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div>
+
+                        <div *ngIf="getAllProducts[0].multipleimage.length > 0" class="product-nav product-nav-thumbs">
+                            <a *ngFor="let images of getAllProducts[0].multipleimage" class="active">
+                                <img src="{{images}}" alt="product desc">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product product-7 text-center">
+                    <figure class="product-media">
+                        <span *ngIf="getAllProducts[1]?.tag" class="product-label label-new">{{getAllProducts[1].tag}}</span>
+                        <a routerLink="/product/{{getAllProducts[1]._id}}">
+                            <img src="{{getAllProducts[1].image}}" alt="Product image" class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a (click)="addToWishlist(getAllProducts[1]._id)" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+
+                        </div>
+
+                        <div class="product-action">
+                            <a (click)="addToCart(getAllProducts[1]._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div>
+                    </figure>
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a >{{getAllProducts[1]?.categoryId?.name}}</a>
+                        </div>
+                        <h3 class="product-title"><a routerLink="/product/{{getAllProducts[1]._id}}">{{getAllProducts[1].name}}</a></h3>
+                        <div class="product-price">
+                            ₹ {{getAllProducts[1].salePrice}}
+                        </div>
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div>
+                            </div>
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div>
+
+                        <div *ngIf="getAllProducts[1].multipleimage.length > 0" class="product-nav product-nav-thumbs">
+                            <a *ngFor="let images of getAllProducts[1].multipleimage" class="active">
+                                <img src="{{images}}" alt="product desc">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product product-7 text-center">
+                    <figure class="product-media">
+                        <span *ngIf="getAllProducts[2]?.tag" class="product-label label-new">{{getAllProducts[2].tag}}</span>
+                        <a routerLink="/product/{{getAllProducts[2]?._id}}">
+                            <img src="{{getAllProducts[2]?.image}}" alt="Product image" class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a (click)="addToWishlist(getAllProducts[2]?._id)" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+
+                        </div>
+
+                        <div class="product-action">
+                            <a (click)="addToCart(getAllProducts[2]?._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div>
+                    </figure>
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a >{{getAllProducts[2]?.categoryId?.name}}</a>
+                        </div>
+                        <h3 class="product-title"><a routerLink="/product/{{getAllProducts[2]?._id}}">{{getAllProducts[2]?.name}}</a></h3>
+                        <div class="product-price">
+                            ₹ {{getAllProducts[2]?.salePrice}}
+                        </div>
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div>
+                            </div>
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div>
+
+                        <div *ngIf="getAllProducts[2]?.multipleimage?.length > 0" class="product-nav product-nav-thumbs">
+                            <a *ngFor="let images of getAllProducts[2]?.multipleimage" class="active">
+                                <img src="{{images}}" alt="product desc">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product product-7 text-center">
+                    <figure class="product-media">
+                        <span *ngIf="getAllProducts[3]?.tag" class="product-label label-new">{{getAllProducts[3]?.tag}}</span>
+                        <a routerLink="/product/{{getAllProducts[3]?._id}}">
+                            <img src="{{getAllProducts[3]?.image}}" alt="Product image" class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a (click)="addToWishlist(getAllProducts[3]._id)" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+
+                        </div>
+
+                        <div class="product-action">
+                            <a (click)="addToCart(getAllProducts[3]._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div>
+                    </figure>
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a >{{getAllProducts[3]?.categoryId?.name}}</a>
+                        </div>
+                        <h3 class="product-title"><a routerLink="/product/{{getAllProducts[3]?._id}}">{{getAllProducts[3]?.name}}</a></h3>
+                        <div class="product-price">
+                            ₹ {{getAllProducts[3]?.salePrice}}
+                        </div>
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div>
+                            </div>
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div>
+
+                        <div *ngIf="getAllProducts[3]?.multipleimage?.length > 0" class="product-nav product-nav-thumbs">
+                            <a *ngFor="let images of getAllProducts[3]?.multipleimage" class="active">
+                                <img src="{{images}}" alt="product desc">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <app-owl-carousel-slider></app-owl-carousel-slider> -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

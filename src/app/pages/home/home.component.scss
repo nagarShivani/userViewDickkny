@@ -1,0 +1,56 @@
+/* Equal Heights for OwlCarousel 2 */
+
+.owl-carousel {
+  .owl-stage {
+    display: flex;
+  }
+  .owl-item {
+    display: flex;
+    flex: 1 0 auto;
+  }
+  .thumbnail {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+    .caption {
+      display: flex;
+      flex: 1 0 auto;
+      flex-direction: column;
+      .flex-text {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+/* Basic styling for size buttons */
+.size-button {
+display: inline-block;
+margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+.size-button button {
+padding: 8px 12px;
+font-size: 14px;
+border: 1px solid #ccc;
+background-color: #fff;
+color: #333;
+cursor: pointer;
+transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Style for active (selected) button */
+.size-button.active button {
+background-color: #007bff; /* Change to your selected color */
+color: #fff; /* Text color when selected */
+border-color: #007bff; /* Border color when selected */
+}
+
+/* Hover effect for buttons */
+.size-button button:hover:not(.active) {
+background-color: #f0f0f0; /* Change to your hover background color */
+}

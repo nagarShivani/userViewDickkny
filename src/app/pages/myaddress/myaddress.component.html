@@ -1,0 +1,37 @@
+<main class="main">
+        	
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="dashboard.html">My Account</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                 <div class="col-md-6 offset-md-3">
+                    <div *ngFor="let address of UserDetails.multipleAddressArray" class="addressdata">
+                       <h4>{{UserDetails.firstName}} {{UserDetails.lastName}}</h4>
+                       <p>{{address.houseNumber}}, <span>{{address.streetAddress}}</span> , <span> {{address.apartment}}</span></p>
+                       <p>{{address.city}}, <span> {{address.state}}</span>, <span> {{address.postcode}}</span></p>
+                    <p>Contact Number: {{UserDetails.phone}}</p>
+                    <div class="adress_edit">
+                      <a class="cursor-pointer" routerLink="/address/{{address._id}}">Edit</a>
+                      <a class="cursor-pointer" (click)="removeAddress(address._id)">Remove</a>
+                    </div>
+                    </div>
+                    <div class="add_address">
+                     <a routerLink="/address"> Add Address</a>
+                    </div>
+                  
+                 </div>
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

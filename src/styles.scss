@@ -1,0 +1,24 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #003e70 !important;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #003e70;
+}
+
+.spinner-overlay ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #003e70;
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #003e70;
+}

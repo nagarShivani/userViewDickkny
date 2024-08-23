@@ -1,0 +1,65 @@
+<main class="main">
+        	
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="dashboard.html">My Account</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                 <div class="col-md-6 offset-md-3">
+                   <div class="profile">
+                    <form (submit)="submitProfileDetails()">
+                        <h2 class="title">Profile Details</h2>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>First Name *</label>
+                                <input type="text" [(ngModel)]="UserDetails.firstName"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label>Last Name *</label>
+                                <input type="text" [(ngModel)]="UserDetails.lastName"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <!-- <label>Display Name *</label>
+                        <input type="text" class="form-control" required> -->
+                        
+                        <label>Email address *</label>
+                        <input type="email" [(ngModel)]="UserDetails.email"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
+
+                        <label>Phone *</label>
+                        <input type="email" [(ngModel)]="UserDetails.phone"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
+
+                        <label>Street address *</label>
+                        <input type="email" [(ngModel)]="UserDetails.streetAddress"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
+
+                        <!-- <label>Current password </label>
+                        <input type="password" class="form-control">
+
+                        <label>New password </label>
+                        <input type="password" class="form-control">
+
+                        <label>Confirm new password</label>
+                        <input type="password" class="form-control mb-2"> -->
+
+                        <button type="submit" class="btn btn-outline-primary-2">
+                            <span>SAVE CHANGES</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                    </form>
+                   </div>
+                 </div>
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

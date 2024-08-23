@@ -1,0 +1,14 @@
+.cursor-pointer{
+    cursor: pointer;
+  }
+
+  .addressdata {
+    /* Your default styling for addressdata */
+    cursor: pointer;
+}
+
+.addressdata.selected {
+    /* Styling when addressdata is selected */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}

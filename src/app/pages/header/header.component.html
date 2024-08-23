@@ -1,0 +1,172 @@
+<header class="header header-7">
+  <div class="header-middle sticky-header">
+    <div class="container-fluid">
+      <div class="header-left">
+        <button class="mobile-menu-toggler">
+          <span class="sr-only">Toggle mobile menu</span>
+          <i class="icon-bars"></i>
+        </button>
+
+        <a routerLink="home" class="logo">
+          <img
+            src="assets/images/logo.png"
+            alt="Dickkny Logo"
+            width="145"
+            height="28"
+          />
+        </a>
+
+        <nav class="main-nav">
+          <ul class="menu sf-arrows">
+            <li>
+              <a routerLink="/home" class="cursor-pointer">Home</a>
+            </li>
+
+            <li *ngFor="let category of allCategory">
+              <a
+                routerLink="/product-list/{{ category._id }}"
+                class="cursor-pointer"
+                >{{ category.name }}</a
+              >
+            </li>
+            <!-- <li>
+                            <a href="#" class="">Joggers </a>
+                        </li>
+                        <li>
+                            <a href="#" class="">Shorts </a>
+                        </li>
+                        <li>
+                            <a href="#" class="">Capri </a>
+                        </li> -->
+            <!-- <li>
+                            <a href="#" class="sf-with-ul">Jeans </a>
+
+                            <ul>
+                                <li><a href="#">Wide lag Fit</a></li>
+                                <li><a href="#"> Skinny Fit  </a></li>
+                                <li><a href="#">Boot-leg Fit </a></li>
+                                <li><a href="#">Straight Fit      </a></li>
+                                <li><a href="#">Cargo Fit </a></li>
+                                <li><a href="#">Formal Fit </a></li>
+                            </ul>
+                        </li> -->
+          </ul>
+          <!-- End .menu -->
+        </nav>
+        <!-- End .main-nav -->
+      </div>
+      <!-- End .header-left -->
+
+      <div class="header-right">
+        <div class="header-search header-search-extended header-search-visible">
+          <a href="#" class="search-toggle" role="button"
+            ><i class="icon-search"></i
+          ></a>
+          <form action="#" method="get">
+            <div class="header-search-wrapper search-wrapper-wide">
+              <label for="q" class="sr-only">Search</label>
+              <input
+                type="search"
+                class="form-control"
+                [(ngModel)]="searchResult"
+                (ngModelChange)="searchProducts(searchResult)"
+                [ngModelOptions]="{ standalone: true }"
+                name="q"
+                id="q"
+                placeholder="Search product ..."
+                required
+              />
+              <button
+                (click)="search(searchResult)"
+                class="btn btn-primary"
+                type="submit"
+              >
+                <i class="icon-search"></i>
+              </button>
+              <div *ngIf="searchResults?.length > 0" class="search-results">
+                <ul>
+                  <li *ngFor="let result of searchResults">
+                    {{ result.name }}
+                  </li>
+                </ul>
+              </div>
+              <div *ngIf="searchResults?.length === 0 && searchResult">
+                <p>No results found</p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="!isLoggedInObject?.loginid">
+          <ul>
+            <li class="btnlogin"><a routerLink="/signin">Login/Signup</a></li>
+          </ul>
+        </div>
+        <div *ngIf="isLoggedInObject.loginid" class="login_whislist">
+          <ul>
+            <li>
+              <a routerLink="/wishlist"
+                ><i class="icon-heart-o"></i
+                ><span>{{ countOfCartAndWishlist?.wishListLength }}</span></a
+              >
+            </li>
+
+            <li>
+              <a routerLink="/dashboard"><i class="icon-user"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="isLoggedInObject.loginid" class="dropdown cart-dropdown">
+          <a
+            routerLink="/cart"
+            class="dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-display="static"
+          >
+            <i class="icon-shopping-cart"></i>
+            <span class="cart-count">{{
+              countOfCartAndWishlist?.cartLength
+            }}</span>
+          </a>
+
+          <!-- <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-cart-products">
+                            <div class="product">
+                                <div class="product-cart-details">
+                                    <h4 class="product-title">
+                                        <a  routerLink="/product">Blue utility pinafore denim Jeans</a>
+                                    </h4>
+                                    <span class="cart-product-info">
+                                        <span class="cart-product-qty">1</span>
+                                        x   76.00
+                                    </span>
+                                </div>
+                                <figure class="product-image-container">
+                                    <a  routerLink="/product" class="product-image">
+                                        <img src="assets/images/products/jea5.JPG" alt="product">
+                                    </a>
+                                </figure>
+                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                            </div>
+                        </div>
+                        <div class="dropdown-cart-total">
+                            <span>Total</span>
+                            <span class="cart-total-price">76.00</span>
+                        </div>
+                        <div class="dropdown-cart-action">
+                            <a routerLink="/cart" class="btn btn-primary">View Cart</a>
+                            <a routerLink="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                        </div>
+                    </div> -->
+        </div>
+        <!-- End .cart-dropdown -->
+      </div>
+
+      <!-- End .header-right -->
+    </div>
+    <!-- End .container-fluid -->
+  </div>
+  <!-- End .header-middle -->
+</header>

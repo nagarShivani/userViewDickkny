@@ -1,0 +1,8 @@
+<app-header></app-header>
+<div class="spinner-overlay" *ngIf="loaderService.isLoading">
+  <mat-spinner color="red" [diameter]="80"></mat-spinner>
+  <!-- <mat-spinner color="red" [diameter]="100"></mat-spinner> -->
+</div>
+<router-outlet> </router-outlet>
+
+<app-footer></app-footer>
