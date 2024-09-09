@@ -6,4 +6,10 @@
     color: black;
     font-size: medium;
     font-weight: 500;
+    text-align: justify;
 }
+
+ul.content {
+    list-style-type: disc; /* Ensures bullet points are shown */
+    padding-left: 20px; /* Adds indentation for the bullet points */
+  }
