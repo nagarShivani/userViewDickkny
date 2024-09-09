@@ -16,7 +16,7 @@ export class HeaderComponent {
   timer: any;
   searchResult: any;
   getLimitedCategories() {
-    return this.allCategory.slice(0, 4);
+    return this.allCategory.slice(0, 3);
   }
   constructor(
     private userService: UserService,
