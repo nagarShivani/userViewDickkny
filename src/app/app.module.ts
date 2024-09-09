@@ -38,6 +38,10 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { OwlCarouselSliderComponent } from './shared/owl-carousel-slider/owl-carousel-slider.component';
 import { AddressComponent } from './pages/address/address.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { TermsandcondiionsComponent } from './pages/termsandcondiions/termsandcondiions.component';
+import { ShippingComponent } from './pages/shipping/shipping.component';
+import { ReturnComponent } from './pages/return/return.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +72,10 @@ import { Ng5SliderModule } from 'ng5-slider';
     ResetPasswordComponent,
     OwlCarouselSliderComponent,
     AddressComponent,
+    PrivacyComponent,
+    TermsandcondiionsComponent,
+    ShippingComponent,
+    ReturnComponent,
   ],
   imports: [
     BrowserModule,

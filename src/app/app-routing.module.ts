@@ -23,28 +23,56 @@ import { AuthGuard } from './auth.guard';
 import { QuickViewComponent } from './popup/quick-view/quick-view.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { AddressComponent } from './pages/address/address.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { TermsandcondiionsComponent } from './pages/termsandcondiions/termsandcondiions.component';
+import { ShippingComponent } from './pages/shipping/shipping.component';
+import { ReturnComponent } from './pages/return/return.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'signin', component: SigninComponent, canMatch:[AuthGuard] },
+  { path: 'signin', component: SigninComponent, canMatch: [AuthGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'product/:id', component: ProductComponent },
   { path: 'product-list/:id', component: ProductListComponent },
   { path: 'product-list', component: ProductListComponent },
-  { path: 'wishlist', component: WishlistComponent,  canActivate: [AuthGuard]},
-  { path: 'cart', component: CartComponent , canActivate: [AuthGuard]},
-  { path: 'checkout', component: CheckoutComponent,  canActivate: [AuthGuard]},
-  { path: 'dashboard', component: DashboardComponent,  canActivate: [AuthGuard]},
-  { path: 'myprofile', component: MyprofileComponent,  canActivate: [AuthGuard]},
-  { path: 'myorder', component: MyorderComponent,  canActivate: [AuthGuard]},
-  { path: 'mypayments', component: MypaymentsComponent, canActivate: [AuthGuard] },
-  { path: 'myaddress', component: MyaddressComponent, canActivate: [AuthGuard] },
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'myprofile',
+    component: MyprofileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'myorder', component: MyorderComponent, canActivate: [AuthGuard] },
+  {
+    path: 'mypayments',
+    component: MypaymentsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'myaddress',
+    component: MyaddressComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'bulk-inquiry', component: BulkInquiryComponent },
   { path: 'coupon', component: CouponComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'terms&condition', component: TermsandcondiionsComponent },
+  { path: 'shipping', component: ShippingComponent },
+  { path: 'return', component: ReturnComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'single-blog/:id', component: SingleBlogComponent },
-  { path: 'reset-password/:id/:token', component: ResetPasswordComponent , canMatch:[AuthGuard]},
+  {
+    path: 'reset-password/:id/:token',
+    component: ResetPasswordComponent,
+    canMatch: [AuthGuard],
+  },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'address', component: AddressComponent },
   { path: 'address/:addressId', component: AddressComponent },
@@ -54,6 +82,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
