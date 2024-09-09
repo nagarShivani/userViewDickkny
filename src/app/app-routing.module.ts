@@ -59,6 +59,7 @@ const routes: Routes = [
     component: MyaddressComponent,
     canActivate: [AuthGuard],
   },
+
   { path: 'bulk-inquiry', component: BulkInquiryComponent },
   { path: 'coupon', component: CouponComponent },
   { path: 'privacy', component: PrivacyComponent },

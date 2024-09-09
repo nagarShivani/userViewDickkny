@@ -15,8 +15,27 @@
             height="28"
           />
         </a>
-
+        <!-- implement new nav bar with condition of four category  -->
         <nav class="main-nav">
+          <ul class="menu sf-arrows">
+            <li>
+              <a routerLink="/home" class="cursor-pointer">Home</a>
+            </li>
+
+            <li *ngFor="let category of getLimitedCategories()">
+              <a
+                routerLink="/product-list/{{ category._id }}"
+                class="cursor-pointer"
+              >
+                {{ category.name }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- commenting Nav bar  -->
+        <!-- <nav class="main-nav">
+
           <ul class="menu sf-arrows">
             <li>
               <a routerLink="/home" class="cursor-pointer">Home</a>
@@ -38,7 +57,7 @@
                         <li>
                             <a href="#" class="">Capri </a>
                         </li> -->
-            <!-- <li>
+        <!-- <li>
                             <a href="#" class="sf-with-ul">Jeans </a>
 
                             <ul>
@@ -50,9 +69,10 @@
                                 <li><a href="#">Formal Fit </a></li>
                             </ul>
                         </li> -->
-          </ul>
-          <!-- End .menu -->
-        </nav>
+        <!-- </ul> -->
+        <!-- End .menu -->
+        <!-- </nav> -->
+        -->
         <!-- End .main-nav -->
       </div>
       <!-- End .header-left -->
