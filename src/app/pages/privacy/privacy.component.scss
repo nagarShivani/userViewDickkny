@@ -1,31 +1,41 @@
 .entireClass{
-    padding: 5px;
+  padding: 5px;
 }
 .content{
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    font-size:medium;
-    font-weight: 500;
-    text-align: justify;
-    // font-size: 15px;
-    margin-bottom: 10px;
-    
+   font-family: Times New Roman,Times,serif;
+ 
+  color: black;
+  // font-size:medium;
+  font-weight: 500;
+  text-align: justify;
+  font-size: 17px;
+  margin-bottom: 15px;
+  
 }
 
 ul.content {
-    list-style-type: disc; /* Ensures bullet points are shown */
-    padding-left: 20px; /* Adds indentation for the bullet points */
-  }
-  .main{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-  }
-  .smallContent{
+  list-style-type: disc; /* Ensures bullet points are shown */
+  padding-left: 20px; /* Adds indentation for the bullet points */
+}
+.main{
+  font-family: Times New Roman,Times,serif;
+  font-weight: 700;
+}
+.smallContent{
 font-size: 15px;
-  }
+}
 
-  .fontClass{
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.fontClass{
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  
+.allH3{
+  font-family: Times New Roman,Times,serif;
+  font-weight: 700;
+
+}
+.allH5{
+  font-family: Times New Roman,Times,serif;
+  font-weight: 700;
+
+}
