@@ -17,9 +17,15 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {
-      this.userService.toast.snackbarError('Please login/Sign up first');
+      this.userService.toast.snackbarError('Please login/ Signup first');
       this.router.navigate(['/signin']); // Redirect to login page
       return false;
+    }
+  }
+
+  canMatch() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
     }
   }
 }
