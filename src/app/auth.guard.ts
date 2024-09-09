@@ -22,10 +22,4 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-
-  canMatch() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/dashboard']);
-    }
-  }
 }
