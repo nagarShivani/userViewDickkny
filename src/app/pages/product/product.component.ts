@@ -63,10 +63,10 @@ export class ProductComponent {
           size: this.selectedSize ? this.selectedSize._id : null,
         };
 
-        if (!payload.size) {
-          this.userService.toast.snackbarError('Please select a size');
-          return;
-        }
+        // if (!payload.size) {
+        //   this.userService.toast.snackbarError('Please select a size');
+        //   return;
+        // }
 
         this.categoryService.addToCart({ body: payload }).subscribe(
           (res: any) => {
