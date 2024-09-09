@@ -47,76 +47,43 @@ export class ProductComponent {
     );
   }
 
+  addToWishlist(productID: any) {
+    let payload = {
+      userId: this.isLoggedInObject.loginid,
+      productId: productID,
+    };
+    this.categoryService.addToWishlist({ body: payload }).subscribe(
+      (res: any) => {
+        this.userService.toast.snackbarError(res.message);
+        this.categoryService.isCartandWishlistCountCheck(true);
+      },
+      (error: any) => {
+        this.userService.toast.snackbarError(error.error.error);
+      }
+    );
+  }
+
   addToCart(productID: any) {
     const storedUserInfo = localStorage.getItem('isLoggedIn');
     if (storedUserInfo) {
       try {
         this.isLoggedInObject = JSON.parse(storedUserInfo);
-        if (!this.isLoggedInObject.loginid) {
-          throw new Error('Login ID is missing');
-        }
-
         let payload = {
           userId: this.isLoggedInObject.loginid,
           productId: productID,
           quantity: this.quantity,
-          size: this.selectedSize ? this.selectedSize._id : null,
+          size: this.selectedSize._id,
         };
-
-        // if (!payload.size) {
-        //   this.userService.toast.snackbarError('Please select a size');
-        //   return;
-        // }
-
         this.categoryService.addToCart({ body: payload }).subscribe(
           (res: any) => {
             this.userService.toast.snackbarError(res.message);
             this.categoryService.isCartandWishlistCountCheck(true);
           },
           (error: any) => {
-            console.error('Error adding to cart:', error);
             this.userService.toast.snackbarError(error.error.error);
           }
         );
       } catch (error) {
-        console.error('Error parsing user info:', error);
-        this.isLoggedInObject = {};
-        this.router.navigate(['signin']);
-        this.userService.toast.snackbarError('Please first login or register');
-      }
-    } else {
-      this.isLoggedInObject = {};
-      this.router.navigate(['signin']);
-      this.userService.toast.snackbarError('Please first login or register');
-    }
-  }
-
-  addToWishlist(productID: any) {
-    const storedUserInfo = localStorage.getItem('isLoggedIn');
-    if (storedUserInfo) {
-      try {
-        this.isLoggedInObject = JSON.parse(storedUserInfo);
-        if (!this.isLoggedInObject.loginid) {
-          throw new Error('Login ID is missing');
-        }
-
-        let payload = {
-          userId: this.isLoggedInObject.loginid,
-          productId: productID,
-        };
-
-        this.categoryService.addToWishlist({ body: payload }).subscribe(
-          (res: any) => {
-            this.userService.toast.snackbarError(res.message);
-            this.categoryService.isCartandWishlistCountCheck(true);
-          },
-          (error: any) => {
-            console.error('Error adding to wishlist:', error);
-            this.userService.toast.snackbarError(error.error.error);
-          }
-        );
-      } catch (error) {
-        console.error('Error parsing user info:', error);
         this.isLoggedInObject = {};
         this.router.navigate(['signin']);
         this.userService.toast.snackbarError('Please first login or register');
