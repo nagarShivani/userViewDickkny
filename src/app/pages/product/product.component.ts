@@ -16,6 +16,7 @@ export class ProductComponent {
   isLoggedInObject: any;
   selectedSize: any;
   getAllProducts: any;
+  sizeSelected: boolean = false;
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -63,39 +64,65 @@ export class ProductComponent {
     );
   }
 
+  // addToCart(productID: any) {
+  //   const storedUserInfo = localStorage.getItem('isLoggedIn');
+  //   if (storedUserInfo) {
+  //     try {
+  //       this.isLoggedInObject = JSON.parse(storedUserInfo);
+  //       let payload = {
+  //         userId: this.isLoggedInObject.loginid,
+  //         productId: productID,
+  //         quantity: this.quantity,
+  //         size: this.selectedSize._id,
+  //       };
+  //       this.categoryService.addToCart({ body: payload }).subscribe(
+  //         (res: any) => {
+  //           this.userService.toast.snackbarError(res.message);
+  //           this.categoryService.isCartandWishlistCountCheck(true);
+  //         },
+  //         (error: any) => {
+  //           this.userService.toast.snackbarError(error.error.error);
+  //         }
+  //       );
+  //     } catch (error) {
+  //       this.isLoggedInObject = {};
+  //       this.router.navigate(['signin']);
+  //       this.userService.toast.snackbarError('Please first login or register');
+  //     }
+  //   } else {
+  //     this.isLoggedInObject = {};
+  //     this.router.navigate(['signin']);
+  //     this.userService.toast.snackbarError('Please first login or register');
+  //   }
+  // }
   addToCart(productID: any) {
-    const storedUserInfo = localStorage.getItem('isLoggedIn');
-    if (storedUserInfo) {
-      try {
-        this.isLoggedInObject = JSON.parse(storedUserInfo);
-        let payload = {
-          userId: this.isLoggedInObject.loginid,
-          productId: productID,
-          quantity: this.quantity,
-          size: this.selectedSize._id,
-        };
-        this.categoryService.addToCart({ body: payload }).subscribe(
-          (res: any) => {
-            this.userService.toast.snackbarError(res.message);
-            this.categoryService.isCartandWishlistCountCheck(true);
-          },
-          (error: any) => {
-            this.userService.toast.snackbarError(error.error.error);
-          }
-        );
-      } catch (error) {
-        this.isLoggedInObject = {};
-        this.router.navigate(['signin']);
-        this.userService.toast.snackbarError('Please first login or register');
-      }
-    } else {
-      this.isLoggedInObject = {};
-      this.router.navigate(['signin']);
-      this.userService.toast.snackbarError('Please first login or register');
+    if (!this.isLoggedInObject.loginid) {
+      this.userService.toast.snackbarError('Please First Login.');
+      return;
     }
-  }
+    let payload = {
+      userId: this.isLoggedInObject.loginid,
+      productId: productID,
+      quantity: 1,
+      size: this.selectedSize?._id,
+    };
+    this.categoryService.addToCart({ body: payload }).subscribe(
+      (res: any) => {
+        console.log('resss');
+        this.selectedSize = null;
+        this.sizeSelected = false;
+        this.categoryService.isCartandWishlistCountCheck(true);
+        this.userService.toast.snackbarError(res.message);
+      },
+      (error: any) => {
+        console.log('error');
 
+        this.userService.toast.snackbarError(error.error.error);
+      }
+    );
+  }
   selectSize(productSize: any) {
     this.selectedSize = productSize;
+    // this.sizeSelected = true;
   }
 }

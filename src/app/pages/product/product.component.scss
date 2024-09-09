@@ -29,3 +29,9 @@
 .size-button button:hover:not(.active) {
   background-color: #f0f0f0; /* Change to your hover background color */
 }
+.size-button-container {
+  overflow: auto;
+}
+.size-button {
+  margin-right: 5px; /* Adjust spacing */
+}
