@@ -67,8 +67,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         margin: 20,
         loop: true,
         responsive: {
-          0: { items: 4, margin: 10, dots: false, nav: true },
-          480: { items: 4, margin: 10, dots: false, nav: true },
+          0: { items: 2, margin: 10, dots: false, nav: true },
+          480: { items: 2, margin: 10, dots: false, nav: true },
           768: { items: 4, nav: true, dots: false },
           992: { items: 4, nav: true, dots: false },
           1200: { items: 4, nav: true, dots: false },
