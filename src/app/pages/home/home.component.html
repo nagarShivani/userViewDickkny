@@ -1,134 +1,138 @@
 <app-newsletter></app-newsletter>
 <div class="page-wrapper">
   <main class="main">
-    <div class="topsb">
-      <div
-        class="owl-carousel owl-simple"
-        data-toggle="owl"
-        data-owl-options='{
-        "nav": true, 
-        "dots": false,
-        "margin": 20,
-        "loop": true,
-        "responsive": {
-            "0": {
-                "items": 4,
-                "margin": 10,
-                "dots": false,
-                "nav": true
-            },
-            "480": {
-                "items": 4,
-                "margin": 10,
-                "dots": false,
-                "nav": true
-            },
+    <div class="container-fluid">
+      <div class="topsb">
+        <div
+          class="owl-carousel owl-simple"
+          data-toggle="owl"
+          data-owl-options='{
+          "nav": true, 
+          "dots": false,
+          "margin": 20,
+          "loop": true,
+          "responsive": {
+              "0": {
+                  "items": 4,
+                  "margin": 10,
+                  "dots": false,
+                  "nav": true
+              },
+              "480": {
+                  "items": 4,
+                  "margin": 10,
+                  "dots": false,
+                  "nav": true
+              },
+  
+              "768": {
+                  "items": 4,
+                  "nav": true,
+                  "dots": false
+              },
+              "992": {
+                  "items": 4,
+                  "nav": true,
+                  "dots": false
+              },
+              "1200": {
+                  "items": 4,
+                  "nav": true,
+                  "dots": false
+              }
+          }
+      }'
+        >
+          <div *ngFor="let product of getAllProducts" class="banner item topsb">
+            <div class="product product-6">
+              <figure class="product-media">
+                <span *ngIf="product.tag" class="product-label">{{
+                  product.tag
+                }}</span>
+                <a routerLink="/product/{{ product._id }}">
+                  <img
+                    src="{{ product.image }}"
+                    alt="Product image"
+                    class="product-image"
+                  />
+                </a>
 
-            "768": {
-                "items": 4,
-                "nav": true,
-                "dots": false
-            },
-            "992": {
-                "items": 4,
-                "nav": true,
-                "dots": false
-            },
-            "1200": {
-                "items": 4,
-                "nav": true,
-                "dots": false
-            }
-        }
-    }'
-      >
-        <div *ngFor="let product of getAllProducts" class="banner item topsb">
-          <div class="product product-6">
-            <figure class="product-media">
-              <span *ngIf="product.tag" class="product-label">{{
-                product.tag
-              }}</span>
-              <a routerLink="/product/{{ product._id }}">
-                <img
-                  src="{{ product.image }}"
-                  alt="Product image"
-                  class="product-image"
-                />
-              </a>
+                <div class="product-action-vertical cursor-pointer">
+                  <a
+                    (click)="addToWishlist(product._id)"
+                    class="btn-product-icon btn-wishlist btn-expandable"
+                    ><span>add to wishlist</span></a
+                  >
+                </div>
+                <!-- End .product-action -->
+              </figure>
+              <!-- End .product-media -->
 
-              <div class="product-action-vertical cursor-pointer">
-                <a
-                  (click)="addToWishlist(product._id)"
-                  class="btn-product-icon btn-wishlist btn-expandable"
-                  ><span>add to wishlist</span></a
-                >
-              </div>
-              <!-- End .product-action -->
-            </figure>
-            <!-- End .product-media -->
-
-            <div class="product-body">
-              <div *ngIf="product?.brandId?.name" class="product-cat">
-                <a>{{ product.brandId.name }}</a>
-              </div>
-              <!-- End .product-cat -->
-              <h3 class="product-title">
-                <a routerLink="/product/{{ product._id }}">{{
-                  product.name
-                }}</a>
-              </h3>
-              <!-- End .product-title -->
-              <div class="product-price">
-                <span class="new-price">₹ {{ product.salePrice }}</span>
-                <span *ngIf="product.price" class="old-price"
-                  >₹ {{ product.price }}</span
-                >
-              </div>
-              <!-- End .product-price -->
-              <div
-                *ngIf="product.size.length > 0"
-                class="product-nav product-nav-thumbs"
-              >
+              <div class="product-body">
+                <div *ngIf="product?.brandId?.name" class="product-cat">
+                  <a>{{ product.brandId.name }}</a>
+                </div>
+                <!-- End .product-cat -->
+                <h3 class="product-title">
+                  <a routerLink="/product/{{ product._id }}">{{
+                    product.name
+                  }}</a>
+                </h3>
+                <!-- End .product-title -->
+                <div class="product-price">
+                  <span class="new-price">₹ {{ product.salePrice }}</span>
+                  <span *ngIf="product.price" class="old-price"
+                    >₹ {{ product.price }}</span
+                  >
+                </div>
+                <!-- End .product-price -->
                 <div
-                  *ngFor="let productSize of product.size"
-                  class="size-button"
-                  [ngClass]="{
-                    active: sizeSelected && productSize === selectedSize
-                  }"
+                  *ngIf="product.size.length > 0"
+                  class="product-nav product-nav-thumbs"
                 >
-                  <button (click)="selectSize(productSize)">
-                    {{ productSize.size }}
-                  </button>
+                  <div
+                    *ngFor="let productSize of product.size"
+                    class="size-button"
+                    [ngClass]="{
+                      active: sizeSelected && productSize === selectedSize
+                    }"
+                  >
+                    <button (click)="selectSize(productSize)">
+                      {{ productSize.size }}
+                    </button>
+                  </div>
+                </div>
+                <!-- <div class="ratings-container">
+                                  <div class="ratings">
+                                      <div class="ratings-val" style="width: 40%;"></div>
+                                  </div>
+                                  <span class="ratings-text">( 4 Reviews )</span>
+                              </div> -->
+
+                <!-- <div class="product-nav product-nav-dots">
+                                  <a href="#" style="background: #cc9966;"><span class="sr-only">Color name</span></a>
+                                  <a href="#" class="active" style="background: #ebebeb;"><span class="sr-only">Color
+                                          name</span></a>
+                              </div> -->
+
+                <div class="product-action cursor-pointer">
+                  <a
+                    (click)="addToCart(product._id)"
+                    class="btn-product btn-cart"
+                    ><span>add to cart</span></a
+                  >
+                  <!-- <a href="popup/quickView.html" class="btn-product btn-quickview"
+                                      title="Quick view"><span>quick view</span></a> -->
                 </div>
               </div>
-              <!-- <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 40%;"></div>
-                                </div>
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div> -->
-
-              <!-- <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #cc9966;"><span class="sr-only">Color name</span></a>
-                                <a href="#" class="active" style="background: #ebebeb;"><span class="sr-only">Color
-                                        name</span></a>
-                            </div> -->
-
-              <div class="product-action cursor-pointer">
-                <a (click)="addToCart(product._id)" class="btn-product btn-cart"
-                  ><span>add to cart</span></a
-                >
-                <!-- <a href="popup/quickView.html" class="btn-product btn-quickview"
-                                    title="Quick view"><span>quick view</span></a> -->
-              </div>
+              <!-- End .product-body -->
             </div>
-            <!-- End .product-body -->
+            <!-- End .product -->
           </div>
-          <!-- End .product -->
+          <!-- End .col-sm-6 col-lg-3 -->
         </div>
-        <!-- End .col-sm-6 col-lg-3 -->
+        <!-- End .row -->
       </div>
-      <!-- End .row -->
     </div>
 
     <!-- End .container -->
