@@ -1,5 +1,22 @@
 /* Equal Heights for OwlCarousel 2 */
 
+.topsb .product figure.product-media {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.topsb .product figure.product-media img.product-image {
+  height: 400px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.new_arivals .product figure > a img.product-image {
+  height: 250px;
+  object-fit: contain;
+  object-position: center;
+}
 .owl-carousel {
   .owl-stage {
     display: flex;
@@ -20,6 +37,7 @@
         flex-grow: 1;
       }
     }
+
   }
 }
 
