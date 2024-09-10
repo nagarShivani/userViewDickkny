@@ -36,11 +36,7 @@
                 </figure>
                 <!-- End .product-main-image -->
 
-                <div
-                  *ngIf="productDetails?.multipleimage?.length > 0"
-                  id="product-zoom-gallery"
-                  class="product-image-gallery"
-                >
+                <div id="product-zoom-gallery" class="product-image-gallery">
                   <a
                     *ngFor="let images of productDetails.multipleimage"
                     class="product-gallery-item active"
