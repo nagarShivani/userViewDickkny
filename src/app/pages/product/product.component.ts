@@ -38,6 +38,7 @@ export class ProductComponent {
     this.loaderService.showLoading();
     this.categoryService.getProductByID(id).subscribe(
       (res: any) => {
+        console.log('product respnseeeee', res);
         this.productDetails = res;
         this.loaderService.hideLoading();
       },
