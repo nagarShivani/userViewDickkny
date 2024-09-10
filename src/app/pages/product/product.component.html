@@ -22,6 +22,7 @@
               <div class="row">
                 <figure class="product-main-image">
                   <img
+                    style="max-width: 399px; max-height: 499px"
                     id="product-zoom"
                     src="{{ productDetails?.image }}"
                     data-zoom-image="assets/images/jea2.webp"
@@ -230,7 +231,7 @@
                 <a
                   (click)="addToCart(productDetails._id)"
                   class="btn-product btn-cart"
-                  ><span>Add to cart shivaniii</span></a
+                  ><span>Add to cart </span></a
                 >
 
                 <div class="details-action-wrapper cursor-pointer">
@@ -346,7 +347,6 @@
 
         <div class="tab-content">
           <div
-            *ngIf="productDetails?.productInformation"
             class="tab-pane fade show active"
             id="product-desc-tab"
             role="tabpanel"
@@ -371,7 +371,6 @@
           </div>
           <!-- .End .tab-pane -->
           <div
-            *ngIf="productDetails?.additionalInformation"
             class="tab-pane fade"
             id="product-info-tab"
             role="tabpanel"
