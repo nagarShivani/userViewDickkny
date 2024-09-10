@@ -1,39 +1,53 @@
 <main class="main">
-        	
-    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
-        <div class="container-fluid">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
-                <li class="breadcrumb-item"><a href="dashboard.html">My Account</a></li>
-                <li class="breadcrumb-item active" aria-current="page">My Orders</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+        <li class="breadcrumb-item"><a href="dashboard.html">My Account</a></li>
+        <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+      </ol>
+    </div>
+    <!-- End .container -->
+  </nav>
+  <!-- End .breadcrumb-nav -->
 
-    <div class="page-content">
-        <div class="dashboard">
-            <div class="container-fluid">
-                <div class="row">
-                 <div *ngIf="getAllOrder?.length > 0" class="col-md-6 offset-md-3">
-                   <div *ngFor="let myorder of getAllOrder" class="orders_new">
-                     <p>ORDER# {{myorder.orderId}}</p>
-                     <p>Total Amount {{myorder.totalPrice}}</p>
-                     <div *ngFor="let order of myorder.products" class="order_list">
-                      <div class="order_img">
-                        <img src="{{order.productId.image}}">
-                      </div>
-                      <div class="order_content">
-                        <h5>{{order.productId.name}}</h5>
-                        <!-- <p>Size: {{order.productId.size}}</p> -->
-                        <p>Price: {{order.productId.salePrice}}</p>
-                        <p>Address: {{order.selectedAddress.houseNumber}} {{order.selectedAddress.streetAddress}} {{order.selectedAddress.apartment}}, {{order.selectedAddress.city}} , {{order.selectedAddress.state}} {{order.selectedAddress.postcode}}</p>
-                        <p>Payment: {{myorder.paymentMethod}} </p>
-                      </div>
-                     </div>
-                   </div>
-                 </div>
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .dashboard -->
-    </div><!-- End .page-content -->
-</main><!-- End .main -->
+  <div class="page-content">
+    <div class="dashboard">
+      <div class="container-fluid">
+        <div class="row">
+          <div *ngIf="getAllOrder?.length > 0" class="col-md-6 offset-md-3">
+            <div *ngFor="let myorder of getAllOrder" class="orders_new">
+              <p>ORDER# {{ myorder.orderId }}</p>
+              <p>Order Status : {{ myorder.status }}</p>
+              <p>Total Amount {{ myorder.totalPrice }}</p>
+              <div *ngFor="let order of myorder.products" class="order_list">
+                <div class="order_img">
+                  <img src="{{ order.productId.image }}" />
+                </div>
+                <div class="order_content">
+                  <h5>{{ order.productId.name }}</h5>
+                  <!-- <p>Size: {{order.productId.size}}</p> -->
+                  <p>Price: {{ order.productId.salePrice }}</p>
+                  <p>
+                    Address: {{ order.selectedAddress.houseNumber }}
+                    {{ order.selectedAddress.streetAddress }}
+                    {{ order.selectedAddress.apartment }},
+                    {{ order.selectedAddress.city }} ,
+                    {{ order.selectedAddress.state }}
+                    {{ order.selectedAddress.postcode }}
+                  </p>
+                  <p>Payment: {{ myorder.paymentMethod }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End .row -->
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .dashboard -->
+  </div>
+  <!-- End .page-content -->
+</main>
+<!-- End .main -->
