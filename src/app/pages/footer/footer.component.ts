@@ -6,17 +6,18 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
   isLoggedInObject: any;
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private userService: UserService,
     private datePipe: DatePipe
   ) {
-    this.userService.isLogIn.subscribe((data:any)=>{
+    this.userService.isLogIn.subscribe((data: any) => {
       this.redirectPage();
-    })
+    });
     this.redirectPage();
   }
 
@@ -25,21 +26,21 @@ export class FooterComponent {
     if (storedUserInfo) {
       try {
         this.isLoggedInObject = JSON.parse(storedUserInfo);
-        if(page){
-        this.router.navigate([page]);
+        if (page) {
+          this.router.navigate([page]);
         }
       } catch (error) {
         this.isLoggedInObject = {};
-        if(page){
+        if (page) {
           this.router.navigate(['signin']);
-        this.userService.toast.snackbarError("Please first login");
+          this.userService.toast.snackbarError('Please first login');
         }
       }
     } else {
       this.isLoggedInObject = {};
-      if(page){
+      if (page) {
         this.router.navigate(['signin']);
-      this.userService.toast.snackbarError("Please first login");
+        this.userService.toast.snackbarError('Please first login');
       }
     }
   }
@@ -48,6 +49,4 @@ export class FooterComponent {
     const currentDate = new Date();
     return this.datePipe.transform(currentDate, 'yyyy');
   }
-  
-
 }
