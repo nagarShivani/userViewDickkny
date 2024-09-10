@@ -43,7 +43,8 @@
               </div>
               <!-- End .product -->
             </td>
-            <td class="price-col">₹{{ item?.productId?.price }}</td>
+            <!-- <td class="price-col">₹{{ item?.productId?.price }}</td> -->
+            <td class="price-col">₹{{ item?.productId?.salePrice }}</td>
             <td class="size-col">
               <select [(ngModel)]="selectedSize" class="form-control">
                 <option
