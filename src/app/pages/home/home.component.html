@@ -654,7 +654,13 @@
           <article *ngFor="let blog of getAllBlogs" class="entry">
             <figure class="entry-media">
               <a routerLink="/single-blog/{{ blog._id }}">
-                <img src="{{ blog.image }}" alt="image desc" />
+                <!-- <img src="{{ blog.image }}" alt="image desc" /> -->
+                <img
+                  src="{{ blog.image }}"
+                  alt="image desc"
+                  [style.height.px]="200"
+                  [style.width.px]="300"
+                />
               </a>
             </figure>
             <!-- End .entry-media -->
@@ -718,55 +724,57 @@
         >
           <blockquote class="testimonial testimonial-icon text-center">
             <p>
-              “ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              Phasellus quet vel, dapibus id, mattis vel, nisi tortor eu nibh.
-              Nullam mollis. ”
+              "I recently purchased the Bell Bottom jeans from Dickkny, and I'm
+              thrilled with the quality! The denim blend is comfortable, and the
+              fit is just perfect for my body type. I'll definitely be coming
+              back for more!".
             </p>
             <cite>
-              Jenson Gregory
-              <span>Customer</span>
+              New Delhi
+              <span>Anjali Sharma</span>
             </cite>
           </blockquote>
           <!-- End .testimonial -->
 
           <blockquote class="testimonial testimonial-icon text-center">
             <p>
-              “ Impedit, ratione sequi, sunt incidunt magnam et. Delectus
-              obcaecati optio eius error libero perferendis nesciunt atque
-              dolores magni recusand. ”
+              " Dickkny's Skin Fit jeans have become my go-to pair! The stretch
+              in the denim makes them incredibly comfortable, and they look
+              fantastic. The range of colors is great too!".
             </p>
 
             <cite>
-              Victoria Ventura
-              <span>Customer</span>
+              Mumbai
+              <span>Priya MehtaCustomer</span>
             </cite>
           </blockquote>
           <!-- End .testimonial -->
 
           <blockquote class="testimonial testimonial-icon text-center">
             <p>
-              “ Molestias animi illo natus ut quod neque ad accusamus
-              praesentium fuga! Dolores odio alias sapiente odit delectus quasi,
-              explicab, modi animi. ”
+              " I was looking for high-waist jeans that are both stylish and
+              comfortable, and the Boot Leg, Jagging Style jeans from Dickkny
+              exceeded my expectations. They’re perfect for everyday wear, and
+              the material feels premium".
             </p>
 
             <cite>
-              Angelica Lynch
-              <span>Customer</span>
+              Ahmedabad
+              <span>Sneha Patel</span>
             </cite>
           </blockquote>
           <!-- End .testimonial -->
 
           <blockquote class="testimonial testimonial-icon text-center">
             <p>
-              “ Molestias animi illo natus ut quod neque ad accusamus
-              praesentium fuga! Dolores odio alias sapiente odit delectus quasi,
-              explicab. ”
+              " The Boyfriend jeans I bought from Dickkny are just what I was
+              looking for! The fit is relaxed, yet flattering, and the denim
+              lycra fabric is soft and durable. Highly recommended!".
             </p>
 
             <cite>
-              John Smith
-              <span>Customer</span>
+              Bangalore
+              <span>Rashmi Rao</span>
             </cite>
           </blockquote>
           <!-- End .testimonial -->
