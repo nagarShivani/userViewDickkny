@@ -13,7 +13,7 @@
 }
 
 .new_arivals .product figure > a img.product-image {
-  height: 250px;
+  height: 320px;
   object-fit: contain;
   object-position: center;
 }
@@ -72,3 +72,12 @@ border-color: #007bff; /* Border color when selected */
 .size-button button:hover:not(.active) {
 background-color: #f0f0f0; /* Change to your hover background color */
 }
+// .circle-image {
+//   width: 100px; /* Adjust the width as needed */
+//   height: 100px; /* Adjust the height as needed */
+//   border-radius: 50%; /* This makes the image circular */
+//   object-fit: cover; /* Ensures the image is fully contained within the circle */
+// }
+
+
+
