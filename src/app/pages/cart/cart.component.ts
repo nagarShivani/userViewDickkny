@@ -7,19 +7,20 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  isLoggedInObject: any
+  isLoggedInObject: any;
   cartDetail: any;
   applycoupon: any;
   subTotal: any;
   discountValue: any;
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private loaderService: LoaderService,
     private categoryService: CategoryService,
-    private router : Router
+    private router: Router
   ) {
     this.getIsLoggedInObject();
   }
@@ -43,17 +44,18 @@ export class CartComponent {
     this.loaderService.showLoading();
     this.categoryService.getCartOfUser(loginDetail.loginid).subscribe(
       (res: any) => {
+        console.log('Response of actual cart', res);
         this.cartDetail = res.items;
 
-        this.subTotal = this.cartDetail.reduce((total:any, item:any) => {
-            const price = parseFloat(item.productId.price);
-            const salePrice = parseFloat(item.productId.salePrice);
-            const itemPrice = isNaN(salePrice) ? price : salePrice;
-            return total + (itemPrice * item.quantity);
+        this.subTotal = this.cartDetail.reduce((total: any, item: any) => {
+          const price = parseFloat(item.productId.price);
+          const salePrice = parseFloat(item.productId.salePrice);
+          const itemPrice = isNaN(salePrice) ? price : salePrice;
+          return total + itemPrice * item.quantity;
         }, 0);
-        
+
         setTimeout(() => {
-        this.loaderService.hideLoading();
+          this.loaderService.hideLoading();
         }, 1000);
       },
       (error: any) => {
@@ -66,9 +68,9 @@ export class CartComponent {
   removeFromCartlist(productID: any) {
     this.loaderService.showLoading();
     let payload = {
-      "userId": this.isLoggedInObject.loginid,
-      "productId": productID,
-    }
+      userId: this.isLoggedInObject.loginid,
+      productId: productID,
+    };
     this.categoryService.removeFromCart({ body: payload }).subscribe(
       (res: any) => {
         this.getCartOfUser(this.isLoggedInObject);
@@ -83,54 +85,51 @@ export class CartComponent {
     );
   }
 
-
   applyCoupon() {
     this.loaderService.showLoading();
-      this.categoryService.applyCoupon({"code" : this.applycoupon}).subscribe(
-        (res: any) => {
-          this.discountValue = res.discountValue;
-          this.userService.toast.snackbarError("Coupon Applied successfully");
-          this.loaderService.hideLoading();
-          // this.applycoupon = "";
-        },
-        (error: any) => {
-          this.loaderService.hideLoading();
-          this.userService.toast.snackbarError(error.error.error);
-        }
-      );
-    }
+    this.categoryService.applyCoupon({ code: this.applycoupon }).subscribe(
+      (res: any) => {
+        this.discountValue = res.discountValue;
+        this.userService.toast.snackbarError('Coupon Applied successfully');
+        this.loaderService.hideLoading();
+        // this.applycoupon = "";
+      },
+      (error: any) => {
+        this.loaderService.hideLoading();
+        this.userService.toast.snackbarError(error.error.error);
+      }
+    );
+  }
 
-
-    updateCart(productId:any,productSize:any, quantity:any){
-        const storedUserInfo = localStorage.getItem('isLoggedIn');
-        if (storedUserInfo) {
-          try {
-            this.isLoggedInObject = JSON.parse(storedUserInfo);
-            let payload={
-              "userId": this.isLoggedInObject.loginid,
-              "productId": productId,
-              "quantity": quantity,
-              "size":productSize
-            }
-            this.categoryService.updateCart(payload).subscribe(
-              (res: any) => {
-                this.getCartOfUser(this.isLoggedInObject);
-                this.userService.toast.snackbarError(res.message);
-                } ,
-              (error: any) => {
-                  this.userService.toast.snackbarError(error.error.error);
-              }
-            );
-          } catch (error) {
-            this.isLoggedInObject = {};
-              this.router.navigate(['signin']);
-            this.userService.toast.snackbarError("Please first login or register");
+  updateCart(productId: any, productSize: any, quantity: any) {
+    const storedUserInfo = localStorage.getItem('isLoggedIn');
+    if (storedUserInfo) {
+      try {
+        this.isLoggedInObject = JSON.parse(storedUserInfo);
+        let payload = {
+          userId: this.isLoggedInObject.loginid,
+          productId: productId,
+          quantity: quantity,
+          size: productSize,
+        };
+        this.categoryService.updateCart(payload).subscribe(
+          (res: any) => {
+            this.getCartOfUser(this.isLoggedInObject);
+            this.userService.toast.snackbarError(res.message);
+          },
+          (error: any) => {
+            this.userService.toast.snackbarError(error.error.error);
           }
-        } else {
-          this.isLoggedInObject = {};
-            this.router.navigate(['signin']);
-          this.userService.toast.snackbarError("Please first login or register");
-        }
+        );
+      } catch (error) {
+        this.isLoggedInObject = {};
+        this.router.navigate(['signin']);
+        this.userService.toast.snackbarError('Please first login or register');
+      }
+    } else {
+      this.isLoggedInObject = {};
+      this.router.navigate(['signin']);
+      this.userService.toast.snackbarError('Please first login or register');
     }
-
+  }
 }

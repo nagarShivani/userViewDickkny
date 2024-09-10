@@ -6,13 +6,14 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.scss']
+  styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent {
-  isLoggedInObject: any
+  isLoggedInObject: any;
   wishListOfUser: any;
   selectedSize: any;
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private loaderService: LoaderService,
     private categoryService: CategoryService
   ) {
@@ -47,15 +48,14 @@ export class WishlistComponent {
     );
   }
 
-
   addToCart(productID: any) {
     this.loaderService.showLoading();
     let payload = {
-      "userId": this.isLoggedInObject.loginid,
-      "productId": productID,
-      "quantity": 1,
-      "size": this.selectedSize
-    }
+      userId: this.isLoggedInObject.loginid,
+      productId: productID,
+      quantity: 1,
+      size: this.selectedSize,
+    };
     this.categoryService.addToCart({ body: payload }).subscribe(
       (res: any) => {
         this.categoryService.isCartandWishlistCountCheck(true);
@@ -72,9 +72,9 @@ export class WishlistComponent {
   removeFromWishlist(productID: any) {
     this.loaderService.showLoading();
     let payload = {
-      "userId": this.isLoggedInObject.loginid,
-      "productId": productID,
-    }
+      userId: this.isLoggedInObject.loginid,
+      productId: productID,
+    };
     this.categoryService.removeFromWishList({ body: payload }).subscribe(
       (res: any) => {
         this.getWishListOfUser(this.isLoggedInObject);
@@ -88,5 +88,4 @@ export class WishlistComponent {
       }
     );
   }
-
 }
