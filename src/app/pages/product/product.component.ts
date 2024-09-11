@@ -78,18 +78,59 @@ export class ProductComponent implements OnInit {
       }
     );
   }
-
+  // commenting add to cart
+  // addToCart(productID: any) {
+  //   const storedUserInfo = localStorage.getItem('isLoggedIn');
+  //   if (storedUserInfo) {
+  //     try {
+  //       this.isLoggedInObject = JSON.parse(storedUserInfo);
+  //       let payload = {
+  //         userId: this.isLoggedInObject.loginid,
+  //         productId: productID,
+  //         quantity: this.quantity,
+  //         size: this.selectedSize._id,
+  //       };
+  //       this.categoryService.addToCart({ body: payload }).subscribe(
+  //         (res: any) => {
+  //           this.userService.toast.snackbarError(res.message);
+  //           this.categoryService.isCartandWishlistCountCheck(true);
+  //         },
+  //         (error: any) => {
+  //           this.userService.toast.snackbarError(error.error.error);
+  //         }
+  //       );
+  //     } catch (error) {
+  //       this.isLoggedInObject = {};
+  //       this.router.navigate(['signin']);
+  //       this.userService.toast.snackbarError('Please first login or register');
+  //     }
+  //   } else {
+  //     this.isLoggedInObject = {};
+  //     this.router.navigate(['signin']);
+  //     this.userService.toast.snackbarError('Please first login or register');
+  //   }
+  // }
   addToCart(productID: any) {
     const storedUserInfo = localStorage.getItem('isLoggedIn');
+
+    // Check if the user is logged in
     if (storedUserInfo) {
       try {
         this.isLoggedInObject = JSON.parse(storedUserInfo);
+
+        // Check if size is selected
+        if (!this.selectedSize || !this.selectedSize._id) {
+          this.userService.toast.snackbarError('Please select a size.');
+          return;
+        }
+
         let payload = {
           userId: this.isLoggedInObject.loginid,
           productId: productID,
           quantity: this.quantity,
           size: this.selectedSize._id,
         };
+
         this.categoryService.addToCart({ body: payload }).subscribe(
           (res: any) => {
             this.userService.toast.snackbarError(res.message);
