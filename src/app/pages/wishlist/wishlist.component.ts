@@ -61,6 +61,8 @@ export class WishlistComponent {
         this.categoryService.isCartandWishlistCountCheck(true);
         this.loaderService.hideLoading();
         this.userService.toast.snackbarError(res.message);
+        // Remove from wishlist after adding to cart
+        this.removeFromWishlist(productID);
       },
       (error: any) => {
         this.loaderService.hideLoading();

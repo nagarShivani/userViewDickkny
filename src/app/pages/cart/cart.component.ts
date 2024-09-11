@@ -44,7 +44,7 @@ export class CartComponent {
     this.loaderService.showLoading();
     this.categoryService.getCartOfUser(loginDetail.loginid).subscribe(
       (res: any) => {
-        console.log('Response of actual cart', res);
+        console.log('Response of actual cart componenet', res);
         this.cartDetail = res.items;
 
         this.subTotal = this.cartDetail.reduce((total: any, item: any) => {
