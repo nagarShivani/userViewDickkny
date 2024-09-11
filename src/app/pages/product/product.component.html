@@ -28,23 +28,17 @@
                     data-zoom-image="assets/images/jea2.webp"
                     alt="product image"
                   />
-                  <!-- <img id="product-zoom" src="{{productDetails.image}}"
-                                        data-zoom-image="assets/images/jea2.webp" alt="product image"> -->
-                  <!-- <a  id="btn-product-gallery" class="btn-product-gallery">
-                                        <i class="icon-arrows"></i>
-                                    </a> -->
                 </figure>
                 <!-- End .product-main-image -->
 
                 <div id="product-zoom-gallery" class="product-image-gallery">
-                  <a
-                    *ngFor="let images of productDetails.multipleimage"
+                  <div
+                    *ngFor="let image of imgArray"
                     class="product-gallery-item active"
-                    data-image="assets/images/jea2.webp"
-                    data-zoom-image="assets/images/jea2.webp"
+                    [attr.data-zoom-image]="image"
                   >
-                    <img src="{{ images }}" alt="product side" />
-                  </a>
+                    <img src="{{ image }}" alt="product side" />
+                  </div>
                 </div>
                 <!-- End .product-image-gallery -->
               </div>
