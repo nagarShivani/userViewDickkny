@@ -16,7 +16,7 @@
           />
         </a>
         <!-- implement new nav bar with condition of four category  -->
-        <nav class="main-nav">
+        <!-- <nav class="main-nav">
           <ul class="menu sf-arrows">
             <li>
               <a routerLink="/home" class="cursor-pointer">Home</a>
@@ -31,7 +31,7 @@
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
 
         <!-- commenting Nav bar  -->
         <!-- <nav class="main-nav">
@@ -76,6 +76,45 @@
         <!-- End .main-nav -->
       </div>
       <!-- End .header-left -->
+      <!-- header  -->
+      <!-- <div class="header-search header-search-extended header-search-visible">
+        <a href="#" class="search-toggle" role="button"
+          ><i class="icon-search"></i
+        ></a>
+        <form action="#" method="get" class="search-form">
+          <div class="header-search-wrapper search-wrapper-wide">
+            <label for="q" class="sr-only">Search</label>
+            <input
+              type="search"
+              class="form-control"
+              [(ngModel)]="searchResult"
+              (ngModelChange)="searchProducts(searchResult)"
+              [ngModelOptions]="{ standalone: true }"
+              name="q"
+              id="q"
+              placeholder="Search product ..."
+              required
+            />
+            <button
+              (click)="search(searchResult)"
+              class="btn btn-primary"
+              type="submit"
+            >
+              <i class="icon-search"></i>
+            </button>
+            <div *ngIf="searchResults?.length > 0" class="search-results">
+              <ul>
+                <li *ngFor="let result of searchResults">
+                  {{ result.name }}
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="searchResults?.length === 0 && searchResult">
+              <p>No results found</p>
+            </div>
+          </div>
+        </form>
+      </div> -->
 
       <div class="header-right">
         <div class="header-search header-search-extended header-search-visible">
