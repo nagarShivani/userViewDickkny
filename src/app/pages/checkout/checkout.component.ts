@@ -8,9 +8,10 @@ declare var Razorpay: any;
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent {
+  isCouponApplied: boolean = false;
   discountValue: any;
   applycoupon: any;
   isLoggedInObject: any;
@@ -24,13 +25,14 @@ export class CheckoutComponent {
   userDetails: any = {};
   states: any;
   // userDetails.country = "India"
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private loaderService: LoaderService,
     private categoryService: CategoryService,
     private router: Router
   ) {
     this.getIndiaState();
-    this.userDetails.country = "India"
+    this.userDetails.country = 'India';
     this.getIsLoggedInObject();
   }
 
@@ -63,7 +65,7 @@ export class CheckoutComponent {
       'Tripura',
       'Uttar Pradesh',
       'Uttarakhand',
-      'West Bengal'
+      'West Bengal',
     ];
   }
 
@@ -93,10 +95,9 @@ export class CheckoutComponent {
       (error: any) => {
         this.loaderService.hideLoading();
         this.userService.toast.snackbarError(error.error.error);
-      })
+      }
+    );
   }
-
-
 
   getCartOfUser(loginDetail: any) {
     this.loaderService.showLoading();
@@ -107,7 +108,7 @@ export class CheckoutComponent {
           const price = parseFloat(item.productId.price);
           const salePrice = parseFloat(item.productId.salePrice);
           const itemPrice = isNaN(salePrice) ? price : salePrice;
-          return total + (itemPrice * item.quantity);
+          return total + itemPrice * item.quantity;
         }, 0);
         let totalPrice = this.subTotal;
         const gstAmount = (18 / 100) * totalPrice;
@@ -125,19 +126,18 @@ export class CheckoutComponent {
     );
   }
 
-
   applyCoupon(coupon: any) {
     this.loaderService.showLoading();
-    this.categoryService.applyCoupon({ "code": coupon }).subscribe(
+    this.categoryService.applyCoupon({ code: coupon }).subscribe(
       (res: any) => {
         this.discountValue = res.discountValue;
-        this.userService.toast.snackbarError("Coupon Applied successfully");
+        this.userService.toast.snackbarError('Coupon Applied successfully');
         this.loaderService.hideLoading();
         let totalPrice = this.subTotal - this.discountValue;
         const gstAmount = (18 / 100) * totalPrice;
         this.totalPrice = totalPrice + gstAmount;
         this.totalPrice = this.totalPrice.toFixed(2);
-
+        this.isCouponApplied = true;
       },
       (error: any) => {
         this.loaderService.hideLoading();
@@ -148,7 +148,7 @@ export class CheckoutComponent {
 
   addAddress() {
     this.selectedAddressIndex = -1;
-    this.showAddAddressForm = true
+    this.showAddAddressForm = true;
   }
 
   selectDeliveryAddress(index: any, addressId: any) {
@@ -158,31 +158,32 @@ export class CheckoutComponent {
 
   saveAddress() {
     this.loaderService.showLoading();
-    this.categoryService.addAddress(this.isLoggedInObject.loginid, this.userDetails).subscribe(
-      (res: any) => {
-        this.addressId = res.newAddressId;
-        this.payNow();
-        this.userService.toast.snackbarError(res.message);
-        this.loaderService.hideLoading();
-      },
-      (error: any) => {
-        this.loaderService.hideLoading();
-        this.userService.toast.snackbarError(error.error.error);
-      }
-    );
+    this.categoryService
+      .addAddress(this.isLoggedInObject.loginid, this.userDetails)
+      .subscribe(
+        (res: any) => {
+          this.addressId = res.newAddressId;
+          this.payNow();
+          this.userService.toast.snackbarError(res.message);
+          this.loaderService.hideLoading();
+        },
+        (error: any) => {
+          this.loaderService.hideLoading();
+          this.userService.toast.snackbarError(error.error.error);
+        }
+      );
   }
 
   placeOrder() {
     if (!this.UserDetails.firstName || !this.UserDetails.phone) {
-      this.userService.toast.snackbarError("Please First Fill User Details");
-      this.router.navigate(['/myprofile'])
+      this.userService.toast.snackbarError('Please First Fill User Details');
+      this.router.navigate(['/myprofile']);
     }
     if (this.showAddAddressForm && !this.addressId) {
       this.saveAddress();
     } else {
       this.payNow();
     }
-
   }
 
   payNow() {
@@ -197,14 +198,14 @@ export class CheckoutComponent {
       prefill: {
         name: this.UserDetails.firstName + this.UserDetails?.lastName,
         email: this.UserDetails.email,
-        contact: this.UserDetails.phone
+        contact: this.UserDetails.phone,
       },
       notes: {
-        address: this.UserDetails.streetAddress
+        address: this.UserDetails.streetAddress,
       },
       theme: {
-        color: '#3399cc'
-      }
+        color: '#3399cc',
+      },
     };
 
     const rzp1 = new Razorpay(options);
@@ -216,7 +217,7 @@ export class CheckoutComponent {
     // this.loaderService.showLoading();
 
     this.payBill(response.razorpay_payment_id);
-    this.userService.toast.snackbarError("Payment Successfully");
+    this.userService.toast.snackbarError('Payment Successfully');
     // alert(response.razorpay_payment_id);
     // alert(response.razorpay_order_id);
     // alert(response.razorpay_signature);
@@ -224,7 +225,7 @@ export class CheckoutComponent {
   }
 
   private paymentFailed(response: any) {
-    this.userService.toast.snackbarError("Payment Failed");
+    this.userService.toast.snackbarError('Payment Failed');
     // alert(response.error.code);
     // alert(response.error.description);
     // alert(response.error.source);
@@ -262,13 +263,12 @@ export class CheckoutComponent {
     let data = {
       userId: this.isLoggedInObject.loginid,
       products: products, // Assign the products array
-      totalAmount: this.totalPrice,// Ensure this.totalPrice is set correctly
-      paymentId: paymentid,  // Ensure this.totalPrice is set correctly
-      addressId: this.addressId ? this.addressId : this.UserDetails.multipleAddressArray[0]._id
-
+      totalAmount: this.totalPrice, // Ensure this.totalPrice is set correctly
+      paymentId: paymentid, // Ensure this.totalPrice is set correctly
+      addressId: this.addressId
+        ? this.addressId
+        : this.UserDetails.multipleAddressArray[0]._id,
     };
-
-
 
     // Make the HTTP request
     this.categoryService.payBill(data).subscribe(
@@ -284,7 +284,6 @@ export class CheckoutComponent {
       }
     );
   }
-
 
   // payBill() {
   //   this.loaderService.showLoading();
@@ -304,7 +303,7 @@ export class CheckoutComponent {
   //         "productSize":"XXL"
   //       }
   //     ],
-  //     "totalAmount": this.totalPrice 
+  //     "totalAmount": this.totalPrice
   //   }
   //     this.categoryService.payBill(data).subscribe(
   //       (res: any) => {

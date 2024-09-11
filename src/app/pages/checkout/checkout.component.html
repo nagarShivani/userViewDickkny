@@ -1,55 +1,98 @@
 <main class="main">
-        	
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container-fluid">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+      </ol>
+    </div>
+    <!-- End .container -->
+  </nav>
+  <!-- End .breadcrumb-nav -->
 
-    <div class="page-content">
-        <div class="checkout">
-            <div class="container-fluid">
-                <div class="checkout-discount">
-                    <form action="#">
+  <div class="page-content">
+    <div class="checkout">
+      <div class="container-fluid">
+        <div class="checkout-discount">
+          <!-- <form action="#">
                         <input type="text" class="form-control" [(ngModel)]="applycoupon" [ngModelOptions]="{ standalone: true }" required id="checkout-discount-input">
                         <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
                         <button type="submit" (click)="applyCoupon(applycoupon)" class="btn btn-primary">Apply Coupon</button>
-                    </form>
-                </div><!-- End .checkout-discount -->
-                    <h2 class="checkout-title">Delivery Address</h2><!-- End .checkout-title -->
-                    <div class="dashboard">
-                        <div class="container-fluid">
-                            <div class="row">
-                             <div class="col-md-6 offset-md-3">
-                                <div *ngIf="UserDetails?.multipleAddressArray?.length > 0">
-                                <div *ngFor="let address of UserDetails.multipleAddressArray;  let i = index" (click)="selectDeliveryAddress(i,address._id)"  [class.selected]="selectedAddressIndex === i"
-                                class="addressdata cursor-pointer">
-                                   <h4>{{UserDetails.firstName}} {{UserDetails.lastName}}</h4>
-                                   <p>{{address.houseNumber}}, <span>{{address.streetAddress}}</span> , <span> {{address.apartment}}</span></p>
-                                   <p>{{address.city}}, <span> {{address.state}}</span>, <span> {{address.postcode}}</span></p>
-                                <p>Contact Number: {{UserDetails.phone}}</p>
-                                </div>
-                                <!-- <div class="adress_edit">
+                    </form> -->
+          <form action="#">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="applycoupon"
+              [ngModelOptions]="{ standalone: true }"
+              required
+              id="checkout-discount-input"
+              [disabled]="isCouponApplied"
+            />
+            <label for="checkout-discount-input" class="text-truncate"
+              >Have a coupon? <span>Click here to enter your code</span></label
+            >
+            <button
+              type="submit"
+              (click)="applyCoupon(applycoupon)"
+              class="btn btn-primary"
+              [disabled]="isCouponApplied"
+            >
+              Apply Coupon
+            </button>
+          </form>
+        </div>
+        <!-- End .checkout-discount -->
+        <h2 class="checkout-title">Delivery Address</h2>
+        <!-- End .checkout-title -->
+        <div class="dashboard">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <div *ngIf="UserDetails?.multipleAddressArray?.length > 0">
+                  <div
+                    *ngFor="
+                      let address of UserDetails.multipleAddressArray;
+                      let i = index
+                    "
+                    (click)="selectDeliveryAddress(i, address._id)"
+                    [class.selected]="selectedAddressIndex === i"
+                    class="addressdata cursor-pointer"
+                  >
+                    <h4>
+                      {{ UserDetails.firstName }} {{ UserDetails.lastName }}
+                    </h4>
+                    <p>
+                      {{ address.houseNumber }},
+                      <span>{{ address.streetAddress }}</span> ,
+                      <span> {{ address.apartment }}</span>
+                    </p>
+                    <p>
+                      {{ address.city }}, <span> {{ address.state }}</span
+                      >, <span> {{ address.postcode }}</span>
+                    </p>
+                    <p>Contact Number: {{ UserDetails.phone }}</p>
+                  </div>
+                  <!-- <div class="adress_edit">
                                   <a href="#">Edit</a>
                                   <a href="#">Remove</a>
                                 </div> -->
-                                </div>
-                                <div (click)="addAddress()" class="add_address cursor-pointer">
-                                 <a > Add Address</a>
-                                </div>
-                              
-                             </div>
-                            </div><!-- End .row -->
-                        </div><!-- End .container -->
-                    </div><!-- End .dashboard -->
-                <form action="#">
-                    <div class="row">
-                        <div *ngIf="showAddAddressForm" class="col-lg-9">
-                                <!-- <div class="row">
+                </div>
+                <div (click)="addAddress()" class="add_address cursor-pointer">
+                  <a> Add Address</a>
+                </div>
+              </div>
+            </div>
+            <!-- End .row -->
+          </div>
+          <!-- End .container -->
+        </div>
+        <!-- End .dashboard -->
+        <form action="#">
+          <div class="row">
+            <div *ngIf="showAddAddressForm" class="col-lg-9">
+              <!-- <div class="row">
                                     <div class="col-sm-6">
                                         <label>First Name *</label>
                                         <input type="text" [(ngModel)]="userDetails.firstName"  [ngModelOptions]="{ standalone: true }"  class="form-control" required>
@@ -61,71 +104,122 @@
                                     </div>
                                 </div> -->
 
-                                <!-- <label>Country *</label>
+              <!-- <label>Country *</label>
                                 <input type="text" class="form-control" [(ngModel)]="userDetails.country"  [ngModelOptions]="{ standalone: true }"  required> -->
 
-                                <label>Street address *</label>
-                                <input type="text" class="form-control" [(ngModel)]="userDetails.houseNumber"  [ngModelOptions]="{ standalone: true }"  placeholder="HouseNumber Number..." required>
-                                <input type="text" class="form-control"[(ngModel)]="userDetails.streetAddress"  [ngModelOptions]="{ standalone: true }"  placeholder="Street Name ..." required>
-                                <input type="text" class="form-control" [(ngModel)]="userDetails.apartment"  [ngModelOptions]="{ standalone: true }"  placeholder="Appartments, suite, unit etc ..." required>
+              <label>Street address *</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="userDetails.houseNumber"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="HouseNumber Number..."
+                required
+              />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="userDetails.streetAddress"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Street Name ..."
+                required
+              />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="userDetails.apartment"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Appartments, suite, unit etc ..."
+                required
+              />
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>City *</label>
-                                        <input type="text"[(ngModel)]="userDetails.city"  [ngModelOptions]="{ standalone: true }"  class="form-control" required>
-                                    </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>City *</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="userDetails.city"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="form-control"
+                    required
+                  />
+                </div>
 
-                                    <div class="col-sm-6">
-                                        <label>State *</label>
-                                        <select class="form-control" [(ngModel)]="userDetails.state" name="state" required>
-                                          <option value="" disabled selected>Select your state</option>
-                                          <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-                                        </select>
-                                      </div>
-                                </div>
+                <div class="col-sm-6">
+                  <label>State *</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="userDetails.state"
+                    name="state"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      Select your state
+                    </option>
+                    <option *ngFor="let state of states" [value]="state">
+                      {{ state }}
+                    </option>
+                  </select>
+                </div>
+              </div>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Postcode / ZIP *</label>
-                                        <input type="text" [(ngModel)]="userDetails.postcode"  [ngModelOptions]="{ standalone: true }" class="form-control" required>
-                                    </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>Postcode / ZIP *</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="userDetails.postcode"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="form-control"
+                    required
+                  />
+                </div>
 
-                                    <div class="col-sm-6">
-                                        <label>Country *</label>
-                                        <input type="tel" [disabled]="true" [(ngModel)]="userDetails.country"  [ngModelOptions]="{ standalone: true }"  class="form-control" required>
-                                    </div>
-                                </div>
+                <div class="col-sm-6">
+                  <label>Country *</label>
+                  <input
+                    type="tel"
+                    [disabled]="true"
+                    [(ngModel)]="userDetails.country"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
 
-                                <!-- <label>Email address *</label>
+              <!-- <label>Email address *</label>
                                 <input type="email" class="form-control" required> -->
 
-                                <!-- <div class="custom-control custom-checkbox">
+              <!-- <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
                                     <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
                                 </div> -->
 
-                                <!-- <div class="custom-control custom-checkbox">
+              <!-- <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
                                     <label class="custom-control-label" for="checkout-diff-address">Ship to a different address?</label>
                                 </div> -->
 
-                                <!-- <label>Order notes (optional)</label> -->
-                                <!-- <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea> -->
-                        </div><!-- End .col-lg-9 -->
-                        <aside class="col-lg-3">
-                            <div class="summary">
-                                <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+              <!-- <label>Order notes (optional)</label> -->
+              <!-- <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea> -->
+            </div>
+            <!-- End .col-lg-9 -->
+            <aside class="col-lg-3">
+              <div class="summary">
+                <h3 class="summary-title">Your Order</h3>
+                <!-- End .summary-title -->
 
-                                <table class="table table-summary">
-                                    <!-- <thead>
+                <table class="table table-summary">
+                  <!-- <thead>
                                         <tr>
                                             <th>Product</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead> -->
 
-                                    <tbody>
-                                        <!-- <tr>
+                  <tbody>
+                    <!-- <tr>
                                             <td><a href="#">Beige knitted elastic runner shoes</a></td>
                                             <td>₹84.00</td>
                                         </tr>
@@ -134,49 +228,68 @@
                                             <td><a href="#">Blue utility pinafore denimdress</a></td>
                                             <td>₹76,00</td>
                                         </tr> -->
-                                        <tr class="summary-subtotal">
-                                            <td>Subtotal:</td>
-                                            <td>₹ {{subTotal ? subTotal : 0}}</td>
-                                        </tr><!-- End .summary-subtotal -->
+                    <tr class="summary-subtotal">
+                      <td>Subtotal:</td>
+                      <td>₹ {{ subTotal ? subTotal : 0 }}</td>
+                    </tr>
+                    <!-- End .summary-subtotal -->
 
+                    <tr *ngIf="discountValue" class="summary-subtotal">
+                      <td>Coupon:</td>
+                      <td>- ₹ {{ discountValue ? discountValue : 0 }}</td>
+                    </tr>
+                    <tr>
+                      <td>Shipping:</td>
+                      <td>Free shipping</td>
+                    </tr>
+                    <tr>
+                      <td>GST :</td>
+                      <td>18 %</td>
+                    </tr>
+                    <tr class="summary-total">
+                      <td>Total:</td>
+                      <td>₹ {{ totalPrice ? totalPrice : 0 }}</td>
+                    </tr>
+                    <!-- End .summary-total -->
+                  </tbody>
+                </table>
+                <!-- End .table table-summary -->
 
-                                    <tr *ngIf="discountValue" class="summary-subtotal">
-                                        <td>Coupon:</td>
-                                        <td>- ₹ {{discountValue ? discountValue : 0}}</td>
-                                    </tr>
-                                        <tr>
-                                            <td>Shipping:</td>
-                                            <td>Free shipping</td>
-                                        </tr>
-                                        <tr>
-                                            <td>GST :</td>
-                                            <td>18 %</td>
-                                        </tr>
-                                        <tr class="summary-total">
-                                            <td>Total:</td>
-                                            <td>₹ {{totalPrice ? totalPrice : 0}}</td>
-                                        </tr><!-- End .summary-total -->
-                                    </tbody>
-                                </table><!-- End .table table-summary -->
+                <div class="accordion-summary" id="accordion-payment">
+                  <div class="card">
+                    <div class="card-header" id="heading-1">
+                      <h2 class="card-title">
+                        <a
+                          role="button"
+                          data-toggle="collapse"
+                          href="#collapse-1"
+                          aria-expanded="true"
+                          aria-controls="collapse-1"
+                        >
+                          Razorpay
+                        </a>
+                      </h2>
+                    </div>
+                    <!-- End .card-header -->
+                    <div
+                      id="collapse-1"
+                      class="collapse show"
+                      aria-labelledby="heading-1"
+                      data-parent="#accordion-payment"
+                    >
+                      <div class="card-body">
+                        Make your payment directly into our bank account. Please
+                        use your Order ID as the payment reference. Your order
+                        will not be shipped until the funds have cleared in our
+                        account.
+                      </div>
+                      <!-- End .card-body -->
+                    </div>
+                    <!-- End .collapse -->
+                  </div>
+                  <!-- End .card -->
 
-                                <div class="accordion-summary" id="accordion-payment">
-                                    <div class="card">
-                                        <div class="card-header" id="heading-1">
-                                            <h2 class="card-title">
-                                                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                                    Razorpay
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
-                                            <div class="card-body">
-                                                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-
-                                    <!-- <div class="card">
+                  <!-- <div class="card">
                                         <div class="card-header" id="heading-3">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
@@ -189,19 +302,29 @@
                                             </div>
                                         </div>
                                     </div> -->
+                </div>
+                <!-- End .accordion -->
 
-
-                                </div><!-- End .accordion -->
-
-                                <button type="submit"(click)="placeOrder()" class="btn btn-outline-primary-2 btn-order btn-block">
-                                    <span class="btn-text">Place Order</span>
-                                    <span class="btn-hover-text">Proceed to Checkout</span>
-                                </button>
-                            </div><!-- End .summary -->
-                        </aside><!-- End .col-lg-3 -->
-                    </div><!-- End .row -->
-                </form>
-            </div><!-- End .container -->
-        </div><!-- End .checkout -->
-    </div><!-- End .page-content -->
-</main><!-- End .main -->
+                <button
+                  type="submit"
+                  (click)="placeOrder()"
+                  class="btn btn-outline-primary-2 btn-order btn-block"
+                >
+                  <span class="btn-text">Place Order</span>
+                  <span class="btn-hover-text">Proceed to Checkout</span>
+                </button>
+              </div>
+              <!-- End .summary -->
+            </aside>
+            <!-- End .col-lg-3 -->
+          </div>
+          <!-- End .row -->
+        </form>
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .checkout -->
+  </div>
+  <!-- End .page-content -->
+</main>
+<!-- End .main -->
