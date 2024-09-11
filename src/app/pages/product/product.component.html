@@ -5,7 +5,8 @@
         <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
         <li class="breadcrumb-item"><a>Products</a></li>
         <li class="breadcrumb-item active" aria-current="page">
-          {{ productDetails?.name }}
+          <!-- {{ productDetails?.name }} -->
+          {{ (productDetails$ | async)?.name }}
         </li>
       </ol>
     </div>
@@ -24,20 +25,27 @@
                   <img
                     style="max-width: 399px; max-height: 499px"
                     id="product-zoom"
-                    src="{{ productDetails?.image }}"
+                    [src]="(productDetails$ | async)?.image"
                     data-zoom-image="assets/images/jea2.webp"
                     alt="product image"
                   />
                 </figure>
                 <!-- End .product-main-image -->
 
-                <div id="product-zoom-gallery" class="product-image-gallery">
+                <div
+                  id="product-zoom-gallery"
+                  class="product-image-gallery"
+                  *ngIf="
+                    productDetails$ | async as productDetails;
+                    else loading
+                  "
+                >
                   <div
-                    *ngFor="let image of imgArray"
+                    *ngFor="let image of productDetails.multipleimage"
                     class="product-gallery-item active"
                     [attr.data-zoom-image]="image"
                   >
-                    <img src="{{ image }}" alt="product side" />
+                    <img [src]="image" alt="product side" />
                   </div>
                 </div>
                 <!-- End .product-image-gallery -->
@@ -50,11 +58,20 @@
 
           <div class="col-md-6">
             <div class="product-details">
-              <h1 *ngIf="productDetails?.brandId?.name" class="product-title">
+              <!-- <h1 *ngIf="productDetails?.brandId?.name" class="product-title">
                 {{ productDetails?.brandId?.name }}
+              </h1> -->
+              <h1
+                *ngIf="(productDetails$ | async)?.brandId?.name"
+                class="product-title"
+              >
+                {{ (productDetails$ | async)?.brandId?.name }}
               </h1>
+
               <!-- End .product-title -->
-              <h1 class="product-title">{{ productDetails?.name }}</h1>
+              <h1 class="product-title">
+                {{ (productDetails$ | async)?.name }}
+              </h1>
               <!-- End .product-title -->
 
               <!-- <div class="ratings-container">
@@ -64,11 +81,13 @@
                                 <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
                             </div> -->
               <!-- <div class="product-price">₹{{ productDetails?.price }}</div> -->
-              <div class="product-price">₹{{ productDetails?.salePrice }}</div>
+              <div class="product-price">
+                ₹{{ (productDetails$ | async)?.salePrice }}
+              </div>
               <!-- End .product-price -->
 
               <div class="product-content">
-                <p>{{ productDetails?.description }}</p>
+                <p>{{ (productDetails$ | async)?.description }}</p>
               </div>
               <!-- End .product-content -->
 
@@ -87,7 +106,7 @@
 
               <div class="details-filter-row details-row-size">
                 <label for="size">Size:</label>
-                <div
+                <!-- <div
                   *ngIf="productDetails?.size?.length > 0"
                   class="product-nav product-nav-thumbs"
                 >
@@ -100,7 +119,22 @@
                       {{ productSize.size }}
                     </button>
                   </div>
+                </div> -->
+                <div
+                  *ngIf="(productDetails$ | async)?.size?.length > 0"
+                  class="product-nav product-nav-thumbs"
+                >
+                  <div
+                    *ngFor="let productSize of (productDetails$ | async)?.size"
+                    class="size-button"
+                    [ngClass]="{ active: productSize === selectedSize }"
+                  >
+                    <button (click)="selectSize(productSize)">
+                      {{ productSize.size }}
+                    </button>
+                  </div>
                 </div>
+
                 <!-- <div *ngIf="productDetails.size.length > 0" class="select-custom">
                                     <select name="size" id="size" class="form-control">
                                         <option value="#" selected="selected">Select a size</option>
@@ -200,6 +234,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="details-filter-row details-row-size">
                 <label for="qty">Qty:</label>
                 <div class="product-details-quantity">
@@ -218,33 +253,56 @@
               </div>
 
               <div class="product-details-action cursor-pointer">
-                <a
+                <!-- <a
                   (click)="addToCart(productDetails._id)"
                   class="btn-product btn-cart"
                   ><span>Add to cart </span></a
+                > -->
+                <!-- add to cart  -->
+                <a
+                  *ngIf="productDetails$ | async as productDetails"
+                  (click)="addToCart(productDetails._id)"
+                  class="btn-product btn-cart"
                 >
+                  <span>Add to cart</span>
+                </a>
 
                 <div class="details-action-wrapper cursor-pointer">
-                  <a
+                  <!-- <a
                     (click)="addToWishlist(productDetails._id)"
                     class="btn-product btn-wishlist"
                     title="Wishlist"
                     ><span>Add to Wishlist</span></a
+                  > -->
+                  <!-- wishlist  -->
+                  <a
+                    *ngIf="productDetails$ | async as productDetails"
+                    (click)="addToWishlist(productDetails._id)"
+                    class="btn-product btn-wishlist"
+                    title="Wishlist"
                   >
+                    <span>Add to Wishlist</span>
+                  </a>
                 </div>
               </div>
               <!-- End .product-details-action -->
 
               <div class="product-details-footer">
                 <div
-                  *ngIf="productDetails?.categoryId?.length > 0"
+                  *ngIf="(productDetails$ | async)?.categoryId?.length > 0"
                   class="product-cat"
                 >
                   <span>Category:</span>
-                  <a *ngFor="let category of productDetails.categoryId">{{
-                    category.name
-                  }}</a
-                  ><span *ngIf="productDetails.categoryId.length > 1"> ,</span>
+                  <a
+                    *ngFor="
+                      let category of (productDetails$ | async)?.categoryId
+                    "
+                    >{{ category.name }}</a
+                  ><span
+                    *ngIf="(productDetails$ | async)?.categoryId.length > 1"
+                  >
+                    ,</span
+                  >
                 </div>
 
                 <div class="social-icons social-icons-sm">
@@ -285,7 +343,7 @@
         <ul class="nav nav-pills justify-content-center" role="tablist">
           <li class="nav-item">
             <a
-              *ngIf="productDetails?.productInformation"
+              *ngIf="(productDetails$ | async)?.productInformation"
               class="nav-link active"
               id="product-desc-link"
               data-toggle="tab"
@@ -298,7 +356,7 @@
           </li>
           <li class="nav-item">
             <a
-              *ngIf="productDetails?.additionalInformation"
+              *ngIf="(productDetails$ | async)?.additionalInformation"
               class="nav-link"
               id="product-info-link"
               data-toggle="tab"
@@ -344,7 +402,7 @@
           >
             <div class="product-desc-content">
               <h3>Product Information</h3>
-              <p>{{ productDetails.productInformation }}</p>
+              <p>{{ (productDetails$ | async)?.productInformation }}</p>
               <!-- <ul>
                                 <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
                                 <li>Vivamus finibus vel mauris ut vehicula.</li>
@@ -368,7 +426,7 @@
           >
             <div class="product-desc-content">
               <h3>Information</h3>
-              <p>{{ productDetails.additionalInformation }}</p>
+              <p>{{ (productDetails$ | async)?.additionalInformation }}</p>
 
               <!-- <h3>Fabric & care</h3>
                             <ul>
@@ -534,10 +592,10 @@
                     }
                 }'
       >
-        <div class="product product-7 text-center">
+        <!-- <div class="product product-7 text-center">
           <figure class="product-media">
             <span
-              *ngIf="getAllProducts[0]?.tag"
+              *ngIf="(productDetails$ | async)?.tag"
               class="product-label label-new"
               >{{ getAllProducts[0].tag }}</span
             >
@@ -785,12 +843,17 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- <app-owl-carousel-slider></app-owl-carousel-slider> -->
     </div>
     <!-- End .container -->
   </div>
   <!-- End .page-content -->
+
+  <ng-template #loading>
+    <!-- Loading spinner or message -->
+    <p>Loading...</p>
+  </ng-template>
 </main>
 <!-- End .main -->

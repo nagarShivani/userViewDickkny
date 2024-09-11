@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -11,14 +13,11 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ProductComponent implements OnInit {
   quantity: number = 1;
-  productDetails: any;
-  imgArray: any[] = [];
   productId: any;
   isLoggedInObject: any;
   selectedSize: any;
-  getAllProducts: any;
-  sizeSelected: boolean = false;
-  apiUrl: string = 'your_api_url_here'; // Make sure to define your apiUrl
+  productDetails$: Observable<any> = of(null);
+  products: any;
 
   constructor(
     private userService: UserService,
@@ -28,32 +27,19 @@ export class ProductComponent implements OnInit {
     private categoryService: CategoryService
   ) {}
 
-  ngOnInit(): void {
-    const allProducts = localStorage.getItem('trendingProducts');
-    if (allProducts) {
-      this.getAllProducts = JSON.parse(allProducts);
-    }
-
+  ngOnInit() {
     this.route.params.subscribe((params) => {
       this.productId = params['id'];
-      if (this.productId) {
-        this.getproductByID(this.productId);
-      }
+      this.productDetails$ = this.getproductByID(this.productId);
     });
   }
-
-  getproductByID(id: any): void {
+  getAllproducts() {
     this.loaderService.showLoading();
-
-    this.categoryService.getProductByID(id).subscribe(
+    this.categoryService.getAllproducts().subscribe(
       (res: any) => {
-        console.log('response 1', res);
-        this.productDetails = res;
-        console.log('response 2', this.productDetails);
-
-        this.imgArray = this.productDetails.multipleimage || [];
-        console.log('response 2', this.imgArray);
-
+        console.log('Get all product response coming from app', res);
+        this.products = res.data;
+        localStorage.setItem('allProducts', JSON.stringify(this.products));
         this.loaderService.hideLoading();
       },
       (error: any) => {
@@ -62,10 +48,24 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+  getproductByID(id: any): Observable<any> {
+    this.loaderService.showLoading();
+    return this.categoryService.getProductByID(id).pipe(
+      switchMap((res: any) => {
+        this.loaderService.hideLoading();
+        return of(res);
+      }),
+      catchError((error: any) => {
+        this.loaderService.hideLoading();
+        this.userService.toast.snackbarError(error.error.error);
+        return of(null);
+      })
+    );
+  }
 
-  addToWishlist(productID: any): void {
-    const payload = {
-      userId: this.isLoggedInObject?.loginid,
+  addToWishlist(productID: any) {
+    let payload = {
+      userId: this.isLoggedInObject.loginid,
       productId: productID,
     };
     this.categoryService.addToWishlist({ body: payload }).subscribe(
@@ -79,34 +79,39 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  addToCart(productID: any): void {
-    if (!this.isLoggedInObject?.loginid) {
-      this.userService.toast.snackbarError('Please First Login.');
-      return;
-    }
-    const payload = {
-      userId: this.isLoggedInObject.loginid,
-      productId: productID,
-      quantity: this.quantity,
-      size: this.selectedSize?._id,
-    };
-    this.categoryService.addToCart({ body: payload }).subscribe(
-      (res: any) => {
-        console.log('Add to cart response', res);
-        this.selectedSize = null;
-        this.sizeSelected = false;
-        this.categoryService.isCartandWishlistCountCheck(true);
-        this.userService.toast.snackbarError(res.message);
-      },
-      (error: any) => {
-        console.log('Add to cart error', error);
-        this.userService.toast.snackbarError(error.error.error);
+  addToCart(productID: any) {
+    const storedUserInfo = localStorage.getItem('isLoggedIn');
+    if (storedUserInfo) {
+      try {
+        this.isLoggedInObject = JSON.parse(storedUserInfo);
+        let payload = {
+          userId: this.isLoggedInObject.loginid,
+          productId: productID,
+          quantity: this.quantity,
+          size: this.selectedSize._id,
+        };
+        this.categoryService.addToCart({ body: payload }).subscribe(
+          (res: any) => {
+            this.userService.toast.snackbarError(res.message);
+            this.categoryService.isCartandWishlistCountCheck(true);
+          },
+          (error: any) => {
+            this.userService.toast.snackbarError(error.error.error);
+          }
+        );
+      } catch (error) {
+        this.isLoggedInObject = {};
+        this.router.navigate(['signin']);
+        this.userService.toast.snackbarError('Please first login or register');
       }
-    );
+    } else {
+      this.isLoggedInObject = {};
+      this.router.navigate(['signin']);
+      this.userService.toast.snackbarError('Please first login or register');
+    }
   }
 
-  selectSize(productSize: any): void {
+  selectSize(productSize: any) {
     this.selectedSize = productSize;
-    // this.sizeSelected = true; // Uncomment if you need to use this
   }
 }
