@@ -360,6 +360,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
             .getAllCategory()
             .toPromise()
             .then((res: any) => {
+              debugger;
+              console.log('get all categories slider response today', res);
               this.getAllCategories = res.data;
               localStorage.setItem(
                 'allCategory',

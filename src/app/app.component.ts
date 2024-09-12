@@ -95,20 +95,25 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // getFeaturedProducts(){
-  //   this.loaderService.showLoading();
-  //   this.categoryService.getProductByCategoryId("666ec81ba6adb24d200f8ba5").subscribe(
-  //     (res: any) => {
-  //       this.getFeaturedProductsDetails = res;
-  //     localStorage.setItem('allFeaturedProducts', JSON.stringify(this.getFeaturedProductsDetails));
-  //         this.loaderService.hideLoading();
-  //       } ,
-  //     (error: any) => {
-  //         this.loaderService.hideLoading();
-  //         this.userService.toast.snackbarError(error.error.error);
-  //     }
-  //   );
-  // }
+  getFeaturedProducts() {
+    this.loaderService.showLoading();
+    this.categoryService
+      .getProductByCategoryId('666ec81ba6adb24d200f8ba5')
+      .subscribe(
+        (res: any) => {
+          this.getFeaturedProductsDetails = res;
+          localStorage.setItem(
+            'allFeaturedProducts',
+            JSON.stringify(this.getFeaturedProductsDetails)
+          );
+          this.loaderService.hideLoading();
+        },
+        (error: any) => {
+          this.loaderService.hideLoading();
+          this.userService.toast.snackbarError(error.error.error);
+        }
+      );
+  }
 
   getTrendingProducts() {
     this.loaderService.showLoading();

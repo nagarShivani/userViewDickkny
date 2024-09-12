@@ -25,8 +25,12 @@
                   <img
                     style="max-width: 399px; max-height: 499px"
                     id="product-zoom"
-                    [src]="(productDetails$ | async)?.image"
-                    data-zoom-image="assets/images/jea2.webp"
+                    [src]="
+                      selectedMainImage || (productDetails$ | async)?.image
+                    "
+                    [attr.data-zoom-image]="
+                      selectedMainImage || 'assets/images/jea2.webp'
+                    "
                     alt="product image"
                   />
                 </figure>
@@ -42,14 +46,15 @@
                 >
                   <div
                     *ngFor="let image of productDetails.multipleimage"
-                    class="product-gallery-item active"
-                    [attr.data-zoom-image]="image"
+                    class="product-gallery-item"
+                    (click)="onImageClick(image)"
                   >
                     <img [src]="image" alt="product side" />
                   </div>
                 </div>
                 <!-- End .product-image-gallery -->
               </div>
+
               <!-- End .row -->
             </div>
             <!-- End .product-gallery -->

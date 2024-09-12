@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   selectedSize: any;
   productDetails$: Observable<any> = of(null);
   products: any;
+  selectedMainImage: string | null = null; // Variable for the selected image
 
   constructor(
     private userService: UserService,
@@ -33,6 +34,12 @@ export class ProductComponent implements OnInit {
       this.productDetails$ = this.getproductByID(this.productId);
     });
   }
+
+  // Method for handling the side image click
+  onImageClick(image: string) {
+    this.selectedMainImage = image; // Set the clicked image as the main image
+  }
+
   getAllproducts() {
     this.loaderService.showLoading();
     this.categoryService.getAllproducts().subscribe(
@@ -48,6 +55,7 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+
   getproductByID(id: any): Observable<any> {
     this.loaderService.showLoading();
     return this.categoryService.getProductByID(id).pipe(
@@ -62,6 +70,7 @@ export class ProductComponent implements OnInit {
       })
     );
   }
+
   addToWishlist(productID: any) {
     const storedUserInfo = localStorage.getItem('isLoggedIn');
 
@@ -69,7 +78,6 @@ export class ProductComponent implements OnInit {
       try {
         this.isLoggedInObject = JSON.parse(storedUserInfo);
 
-        // Check if isLoggedInObject and loginid are valid
         if (this.isLoggedInObject && this.isLoggedInObject.loginid) {
           let payload = {
             userId: this.isLoggedInObject.loginid,
@@ -109,12 +117,10 @@ export class ProductComponent implements OnInit {
   addToCart(productID: any) {
     const storedUserInfo = localStorage.getItem('isLoggedIn');
 
-    // Check if the user is logged in
     if (storedUserInfo) {
       try {
         this.isLoggedInObject = JSON.parse(storedUserInfo);
 
-        // Check if size is selected
         if (!this.selectedSize || !this.selectedSize._id) {
           this.userService.toast.snackbarError('Please select a size.');
           return;
