@@ -35,3 +35,23 @@
 .size-button {
   margin-right: 5px; /* Adjust spacing */
 }
+
+/* Add basic styles to ensure the zoom container is positioned correctly */
+.product-main-image {
+  position: relative;
+}
+
+.zoom-image {
+  transition: transform 0.5s ease;
+  cursor: pointer; /* Optional: changes cursor to indicate zoom effect */
+}
+
+.zoom-image:hover {
+  transform: scale(1.1); /* Adjust scale as needed */
+  z-index: 1; /* Ensure zoomed image is on top */
+}
+
+/* Optional: Create a container to control the zoom area */
+.product-main-image {
+  overflow: hidden; /* Hide any overflow from the zoom effect */
+}
