@@ -1,3 +1,48 @@
+// trending category 
+/* Section: Trending Categories */
+.trending_ca  .owl-item .banner > a {
+  height: 145px;
+  width: 145px;
+  border-radius: 50%;
+  margin: auto;
+  border: 6px solid #003e70;
+  overflow: hidden;
+  background: #003e70;
+}
+.trending_ca .owl-item .banner > a img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+ section.trending_ca .banner {
+  width: auto;
+  padding: 0px;
+  border: 0px !important;
+}
+ section.trending_ca .banner a.banner-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Category content */
+// .trending_ca .categ-content {
+//   margin-top: 0.5rem; /* Adds some spacing between the image and the title */
+// }
+
+// .trending_ca .categ-content a.banner-title {
+//   font-size: 14px;
+//   font-weight: 600;
+//   color: #000000;
+//   text-decoration: none;
+//   display: block;
+//   transition: color 0.3s ease; /* Smooth color transition */
+// }
+
+// .trending_ca .categ-content a.banner-title:hover {
+//   color: #003e70; /* Optional hover effect for better user interaction */
+// }
+
 /* Equal Heights for OwlCarousel 2 */
 
 .topsb .product figure.product-media {
@@ -16,6 +61,14 @@
   height: 320px;
   object-fit: contain;
   object-position: center;
+}
+
+// new arrival 
+
+ .topsb[_ngcontent-ng-c3601008617] .product[_ngcontent-ng-c3601008617] figure.product-media[_ngcontent-ng-c3601008617] {
+  border-radius: 10px 10px 0px 0px;
+} .new_arivals .product figure > a {
+  height: 320px;
 }
 .owl-carousel {
   .owl-stage {

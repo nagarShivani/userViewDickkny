@@ -75,6 +75,23 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         },
       });
     }
+
+    // Initialize specific carousel for trending categories
+    // if ($('.trending-carousel').length) {
+    //   $('.trending-carousel').owlCarousel({
+    //     nav: true,
+    //     dots: false,
+    //     margin: 20,
+    //     loop: true,
+    //     responsive: {
+    //       0: { items: 4, margin: 10, dots: true, nav: false },
+    //       480: { items: 4, margin: 10, dots: true, nav: false },
+    //       768: { items: 6 },
+    //       992: { items: 6 },
+    //       1200: { items: 5, nav: true, dots: false },
+    //     },
+    //   });
+    // }
   }
 
   // sliderData() {

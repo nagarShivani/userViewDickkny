@@ -18,6 +18,7 @@ export class HeaderComponent {
   getLimitedCategories() {
     return this.allCategory.slice(0, 3);
   }
+
   constructor(
     private userService: UserService,
     private loaderService: LoaderService,
