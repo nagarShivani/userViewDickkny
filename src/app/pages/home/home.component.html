@@ -4,6 +4,7 @@
     <div class="container-fluid">
       <div class="topsb">
         <div
+
           class="owl-carousel owl-simple"
           data-toggle="owl"
           data-owl-options='{
@@ -353,7 +354,7 @@
               <span *ngIf="product.tag" class="product-label label-sale">{{
                 product.tag
               }}</span>
-              <a routerLink="/product">
+              <a routerLink="/product/{{ product._id }}">
                 <img
                   src="{{ product.image }}"
                   alt="Product image"

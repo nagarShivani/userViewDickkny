@@ -123,6 +123,7 @@ export class CategoryService extends ApiService {
     });
   }
 
+  
   getProductByCategoryId(id: any) {
     return this.request({
       path: `${this.apiUrl}getProductByCategoryId/${id}`,

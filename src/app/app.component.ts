@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
   getTrendingProducts() {
     this.loaderService.showLoading();
     this.categoryService
-      .getProductByCategoryId('664253bc32594e5fe273148b')
+      .getProductByCategoryId('66d2cd290141a6320116542b')
       .subscribe(
         (res: any) => {
           console.log('Get all trending response coming from app', res);

@@ -328,7 +328,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       if (!trendingProducts) {
         requests.push(
           this.categoryService
-            .getProductByCategoryId('664253bc32594e5fe273148b')
+            .getProductByCategoryId('66d2cd290141a6320116542b')
             .toPromise()
             .then((res: any) => {
               // this.getTrendingProductsDetails = res;
@@ -474,7 +474,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   getTrendingProducts() {
     this.loaderService.showLoading();
     this.categoryService
-      .getProductByCategoryId('664253bc32594e5fe273148b')
+      .getProductByCategoryId('66d2cd290141a6320116542b')
       .subscribe(
         (res: any) => {
           console.log('get all trending products', res);
