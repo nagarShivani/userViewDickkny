@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter , Output } from '@angular/core';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
-
+import { NgZone } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { SerachService } from 'src/app/serach.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent {
+  searchQuery: string = '';
+  searchTerm: string = '';  // Hold the search term
+
+  // searchResults$: Observable<any[]> | undefined; 
+searchResults: any[] = [];  // Hold the search results
   isLoggedInObject: any;
+  keyword: string = '';
   countOfCartAndWishlist: any;
   allCategory: any;
-  searchResults: any;
+  // searchResults: any;
+
+
   timer: any;
   searchResult: any;
   getLimitedCategories() {
@@ -20,10 +33,15 @@ export class HeaderComponent {
   }
 
   constructor(
+    private searchService:SerachService,
+    private ngZone: NgZone,
+    private cd: ChangeDetectorRef,
     private userService: UserService,
     private loaderService: LoaderService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) {
+
+ 
     this.getAllCategory();
 
     this.userService.isLogIn.subscribe((data: any) => {
@@ -35,6 +53,9 @@ export class HeaderComponent {
     this.getIsLoggedInObject();
   }
 
+  onSearch() {
+    this.searchService.updateSearchQuery(this.searchQuery);
+  }
   getAllCategory() {
     this.loaderService.showLoading();
     this.categoryService.getAllCategory().subscribe(
@@ -48,6 +69,18 @@ export class HeaderComponent {
       }
     );
   }
+  // getAllProducts() {
+  //   this.categoryService.getAllproducts().subscribe(
+  //     (res: any) => {
+  //       this.allProducts = res.data;
+  //       this.filteredProducts = this.allProducts;  // Initially, display all products
+  //     },
+  //     (error: any) => {
+  //       console.error('Error fetching products:', error);
+  //     }
+  //   );
+  // }
+
 
   getIsLoggedInObject() {
     const storedUserInfo = localStorage.getItem('isLoggedIn');
@@ -84,6 +117,7 @@ export class HeaderComponent {
     clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
+      console.log("Debounce function triggered"); // Add this for checking
       func.apply(this);
     }, timeout);
   }
@@ -95,12 +129,19 @@ export class HeaderComponent {
   search(searchTerm: any) {
     this.categoryService.searchProducts(searchTerm).subscribe(
       (res: any) => {
-        console.log('Search response', res);
+        console.log('Search response Shivaniiiiii', res);
+        console.log("search response nameee", res.name)
         this.searchResults = res;
+        this.cd.detectChanges();
+
+        console.log("search result nagarrr", this.searchResults)
       },
       (error: any) => {
+         console.error('Error occurred:', error); // Log error if API fails
         this.userService.toast.snackbarError(error.error.error);
       }
     );
   }
+
+  
 }

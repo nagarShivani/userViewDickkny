@@ -7,6 +7,7 @@
           <i class="icon-bars"></i>
         </button>
 
+        
         <a routerLink="home" class="logo">
           <img
             src="assets/images/logo.png"
@@ -21,7 +22,7 @@
             <li>
               <a routerLink="/home" class="cursor-pointer">Home</a>
             </li>
-
+ 
             <!-- <li *ngFor="let category of getLimitedCategories()">
               <a
                 routerLink="/product-list/{{ category._id }}"
@@ -77,47 +78,33 @@
       </div>
       <!-- End .header-left -->
       <!-- header  -->
-      <div class="header-7">
-        <div class="header-search header-search-extended header-search-visible">
+      <div class="header-7 ">
+        <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+        placeholder="Search products..."
+      />
+        <!-- <div class="header-search header-search-extended header-search-visible">
           <a href="#" class="search-toggle" role="button">
             <i class="icon-search"></i>
           </a>
           <form action="#" method="get">
+
             <div class="header-search-wrapper search-wrapper-wide">
               <label for="q" class="sr-only">Search</label>
-              <input
-                type="search"
-                class="form-control"
-                [(ngModel)]="searchResult"
-                (ngModelChange)="searchProducts(searchResult)"
-                [ngModelOptions]="{ standalone: true }"
-                name="q"
-                id="q"
-                placeholder="Search product ..."
-                required
-              />
-              <button
-                (click)="search(searchResult)"
-                class="btn btn-primary"
-                type="submit"
-              >
-                <i class="icon-search"></i>
-              </button>
-              <div *ngIf="searchResults?.length > 0" class="search-results">
-                <ul>
-                  <li *ngFor="let result of searchResults">
-                    {{ result.name }}
-                  </li>
-                </ul>
-              </div>
-              <div *ngIf="searchResults?.length === 0 && searchResult">
-                <p>No results found</p>
-              </div>
+          
+          
+          
+          
+        
             </div>
           </form>
-        </div>
-      </div>
+   
+    
 
+      </div> -->
+      </div>
       <div class="header-right">
         <!-- <div class="header-search header-search-extended header-search-visible">
           <a href="#" class="search-toggle" role="button"

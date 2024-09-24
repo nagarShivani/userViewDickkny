@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy ,OnInit,Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { SerachService } from 'src/app/serach.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -10,12 +11,14 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
+  products: any[] = []; // Assume this is populated with your products
+  filteredProducts: any[] = [];
   allCategory: any;
   getTrendingProductsDetails: any;
   getFeaturedProductsDetails: any;
   getAllBannerDetails: any;
-  products: any;
+  // products: any;
   isLoggedInObject: any;
   getAllBlogDetails: any;
   getTrendingProduct: any;
@@ -26,7 +29,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   getAllCategories: any;
   allFeaturedProduct: any;
 
+  
   constructor(
+    private searchService: SerachService,
     private userService: UserService,
     private loaderService: LoaderService,
     private categoryService: CategoryService,
@@ -41,6 +46,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.getAllBlog();
   }
 
+  ngOnInit() {
+    this.getAllproducts();
+    this.searchService.searchQuery$.subscribe((query) => {
+      this.filteredProducts = this.filterProducts(query);
+    });
+  }
+  filterProducts(query: string): any[] {
+    if (!query) {
+      return this.products; // If no query, show all products
+    }
+    return this.products.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
   ngAfterViewInit() {
     this.sliderData();
 
@@ -54,6 +73,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         .removeClass('iowl-loaded');
     }
   }
+
+
   initializeOwlCarousel() {
     if ($('.owl-carousel').length) {
       const $carousel = $('.owl-carousel');
@@ -341,6 +362,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         );
       }
 
+
       if (!allProducts) {
         requests.push(
           this.categoryService
@@ -422,6 +444,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       (res: any) => {
         console.log('Get all Products response', res);
         this.products = res.data;
+        this.filteredProducts = this.products;
         console.log('products', this.products);
         localStorage.setItem('allProducts', JSON.stringify(this.products));
         this.loaderService.hideLoading();

@@ -15,7 +15,20 @@ import { UserService } from './services/user/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
 export class AppComponent implements OnInit {
+  // searchResults: any[] = [];
+
+  // onSearchResults(results: any[]): void {
+  //   this.searchResults = results;
+  // }
+
+  searchTerm: string = '';  // This stores the search term from the header
+
+  onSearchTermChange(term: string) {
+    this.searchTerm = term;  // Update the search term when it changes
+    console.log('Search term Filtering :', this.searchTerm);  // Log to check if search term is passed
+  }
   title = 'dickkny';
   getAllBlogDetails: any;
   getAllBannerDetails: any;
@@ -156,4 +169,5 @@ export class AppComponent implements OnInit {
       }
     );
   }
+  
 }

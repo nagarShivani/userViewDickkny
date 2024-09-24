@@ -236,6 +236,8 @@ export class CategoryService extends ApiService {
     });
   }
 
+
+  
   getCatSizeColorBrandPrice() {
     return this.request({
       path: `${this.apiUrl}getCatSizeColorBrandPrice`,
@@ -243,8 +245,19 @@ export class CategoryService extends ApiService {
     });
   }
 
-  searchProducts(searchTerm: any) {
+  // searchProducts(searchTerm: any) {
+  //   console.log(searchTerm);
+  //   console.log(`Requesting: ${this.apiUrl}searchProduct?name=${searchTerm}`);
+
+  //   return this.request({
+  //     path: `${this.apiUrl}searchProduct?name=` + searchTerm,
+  //     method: 'GET',
+  //   });
+  // }
+
+    searchProducts(searchTerm: any) {
     console.log(searchTerm);
+    console.log(`Requesting: ${this.apiUrl}searchProduct?name=${searchTerm}`);
 
     return this.request({
       path: `${this.apiUrl}searchProduct?name=` + searchTerm,

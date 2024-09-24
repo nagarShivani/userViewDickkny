@@ -1,4 +1,11 @@
-<app-header></app-header>
+<app-header  ></app-header>
+<!-- <app-header (searchResults)="onSearchResults($event)"></app-header>
+<div *ngIf="searchResults.length">
+  <div *ngFor="let product of searchResults">
+    {{ product.name }} - {{ product.brandId.name }} - {{ product.categoryId.name }}
+  </div>
+</div> -->
+
 <div class="spinner-overlay" *ngIf="loaderService.isLoading">
   <mat-spinner color="red" [diameter]="80"></mat-spinner>
   <!-- <mat-spinner color="red" [diameter]="100"></mat-spinner> -->
@@ -6,3 +13,7 @@
 <router-outlet> </router-outlet>
 
 <app-footer></app-footer>
+
+
+
+
