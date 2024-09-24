@@ -1,5 +1,5 @@
 <header class="header header-7">
-  <div class="header-middle sticky-header">
+  <div class="header-middle sticky-header" style="width: 100vw;">
     <div class="container-fluid">
       <div class="header-left">
         <button class="mobile-menu-toggler">
@@ -23,14 +23,14 @@
               <a routerLink="/home" class="cursor-pointer">Home</a>
             </li>
  
-            <!-- <li *ngFor="let category of getLimitedCategories()">
+            <li *ngFor="let category of getLimitedCategories()">
               <a
                 routerLink="/product-list/{{ category._id }}"
                 class="cursor-pointer"
               >
                 {{ category.name }}
               </a>
-            </li> -->
+            </li>
           </ul>
         </nav>
 
@@ -49,7 +49,7 @@
                 >{{ category.name }}</a
               >
             </li>
-            <!-- <li>
+          <li>
                             <a href="#" class="">Joggers </a>
                         </li>
                         <li>
@@ -76,41 +76,26 @@
 
         <!-- End .main-nav -->
       </div>
+
       <!-- End .header-left -->
       <!-- header  -->
-      <div class="header-7 ">
+      <!-- <div class="header-7 ">
         <input
         type="text"
         [(ngModel)]="searchQuery"
         (input)="onSearch()"
         placeholder="Search products..."
       />
-        <!-- <div class="header-search header-search-extended header-search-visible">
+ 
+      </div> -->
+
+      <!-- <div class="header-7">
+        <div class="header-search header-search-extended header-search-visible">
           <a href="#" class="search-toggle" role="button">
             <i class="icon-search"></i>
           </a>
           <form action="#" method="get">
 
-            <div class="header-search-wrapper search-wrapper-wide">
-              <label for="q" class="sr-only">Search</label>
-          
-          
-          
-          
-        
-            </div>
-          </form>
-   
-    
-
-      </div> -->
-      </div>
-      <div class="header-right">
-        <!-- <div class="header-search header-search-extended header-search-visible">
-          <a href="#" class="search-toggle" role="button"
-            ><i class="icon-search"></i
-          ></a>
-          <form action="#" method="get">
             <div class="header-search-wrapper search-wrapper-wide">
               <label for="q" class="sr-only">Search</label>
               <input
@@ -131,19 +116,69 @@
               >
                 <i class="icon-search"></i>
               </button>
-              <div *ngIf="searchResults?.length > 0" class="search-results">
+              <div *ngFor="let product of searchResults" class="search-results">
+                <p>{{ product.name }}</p>
+                <ul>
+                  <li *ngFor="let product of searchResults">
+                    {{ product.name }}
+                  </li>
+                </ul>
+              </div>
+              <div *ngFor="let product of searchResults" class="product-card">
+                <p>{{ product.name }}</p>
+                </div>
+              
+          
+              <div *ngIf="searchResults?.length === 0 && searchResult">
+                <p>No results found</p>
+              </div>
+            </div>
+          </form>
+
+        
+        </div>
+      </div> -->
+      <div class="header-right">
+        <div class="header-search header-search-extended header-search-visible">
+          <a href="#" class="search-toggle" role="button">
+            <i class="icon-search"></i>
+          </a>
+          <form action="#" method="get">
+            <div class="header-search-wrapper search-wrapper-wide">
+              <label for="q" class="sr-only">Search</label>
+              
+              <!-- Updated search input with simpler functionality -->
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="searchQuery"
+                (input)="onSearch()"
+                name="q"
+                id="q"
+                placeholder="Search products..."
+                required
+              />
+              
+              <button class="btn btn-primary" type="submit">
+                <i class="icon-search"></i>
+              </button>
+        
+              <!-- Search results display -->
+              <div class="search-results">
                 <ul>
                   <li *ngFor="let result of searchResults">
                     {{ result.name }}
                   </li>
                 </ul>
               </div>
-              <div *ngIf="searchResults?.length === 0 && searchResult">
+        
+              <!-- <div *ngIf="searchResults?.length === 0 && searchQuery">
                 <p>No results found</p>
-              </div>
+              </div> -->
             </div>
           </form>
-        </div> -->
+        </div>
+        
         <div *ngIf="!isLoggedInObject?.loginid">
           <ul>
             <li class="btnlogin"><a routerLink="/signin">Login/Signup</a></li>
@@ -218,3 +253,13 @@
   </div>
   <!-- End .header-middle -->
 </header>
+
+
+
+
+
+
+
+
+
+

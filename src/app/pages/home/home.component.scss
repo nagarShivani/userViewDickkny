@@ -25,24 +25,6 @@
   color: #000000;
 }
 
-/* Category content */
-// .trending_ca .categ-content {
-//   margin-top: 0.5rem; /* Adds some spacing between the image and the title */
-// }
-
-// .trending_ca .categ-content a.banner-title {
-//   font-size: 14px;
-//   font-weight: 600;
-//   color: #000000;
-//   text-decoration: none;
-//   display: block;
-//   transition: color 0.3s ease; /* Smooth color transition */
-// }
-
-// .trending_ca .categ-content a.banner-title:hover {
-//   color: #003e70; /* Optional hover effect for better user interaction */
-// }
-
 /* Equal Heights for OwlCarousel 2 */
 
 .topsb .product figure.product-media {
@@ -52,25 +34,32 @@
 }
 
 .topsb .product figure.product-media img.product-image {
-  height: 600px;
+  height: 350px;
   object-fit: contain;
   object-position: center;
 }
+
+// .new_arivals .product figure > a img.product-image {
+//   height: 400px;
+//   object-fit: contain;
+//   object-position: center;
+// }
+
+.new_arivals {
+  min-height: 400px; /* Adjust as needed */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.new_arivals .product {
+  height:  350px; /* Ensure all product cards are of equal height */
+  margin-bottom: 20px; /* Space between product cards */
+}
+
 
 .new_arivals .product figure > a img.product-image {
-  height: 320px;
+  height:  350px;
   object-fit: contain;
   object-position: center;
-}
-
-
-
-// new arrival 
-
- .topsb[_ngcontent-ng-c3601008617] .product[_ngcontent-ng-c3601008617] figure.product-media[_ngcontent-ng-c3601008617] {
-  border-radius: 10px 10px 0px 0px;
-} .new_arivals .product figure > a {
-  height: 320px;
 }
 .owl-carousel {
   .owl-stage {
@@ -127,12 +116,4 @@ border-color: #007bff; /* Border color when selected */
 .size-button button:hover:not(.active) {
 background-color: #f0f0f0; /* Change to your hover background color */
 }
-// .circle-image {
-//   width: 100px; /* Adjust the width as needed */
-//   height: 100px; /* Adjust the height as needed */
-//   border-radius: 50%; /* This makes the image circular */
-//   object-fit: cover; /* Ensures the image is fully contained within the circle */
-// }
-
-
 

@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter , Output } from '@angular/core';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -23,6 +24,7 @@ searchResults: any[] = [];  // Hold the search results
   keyword: string = '';
   countOfCartAndWishlist: any;
   allCategory: any;
+  isSearching: boolean = false; 
   // searchResults: any;
 
 
@@ -52,6 +54,7 @@ searchResults: any[] = [];  // Hold the search results
     });
     this.getIsLoggedInObject();
   }
+  
 
   onSearch() {
     this.searchService.updateSearchQuery(this.searchQuery);
@@ -126,6 +129,8 @@ searchResults: any[] = [];  // Hold the search results
     this.debounce(() => this.search(searchTerm));
   }
 
+  
+
   search(searchTerm: any) {
     this.categoryService.searchProducts(searchTerm).subscribe(
       (res: any) => {
@@ -145,3 +150,7 @@ searchResults: any[] = [];  // Hold the search results
 
   
 }
+
+
+
+

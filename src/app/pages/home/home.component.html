@@ -402,7 +402,7 @@
                 >
               </div>
               <!-- End .product-price -->
-              <div
+              <!-- <div
                 *ngIf="product.size.length > 0"
                 class="product-nav product-nav-thumbs"
               >
@@ -417,7 +417,7 @@
                     {{ productSize.size }}
                   </button>
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div class="ratings-container">
                             <div class="ratings">
@@ -437,9 +437,9 @@
       <h2 class="title text-center mb-2">Offers & Sales</h2>
       <!-- End .title mb-2 -->
 
-      <div class="row">
+      <div class="row" style="margin: 10px;">
         <div *ngFor="let banner of getAllBannerDetails" class="col-md-6">
-          <div class="banner">
+          <div class="banner" >
             <a>
               <img src="{{ banner.image }}" alt="Banner" />
             </a>
@@ -490,7 +490,7 @@
       <!-- End .heading -->
 
       
-      <div class="products new_arivals topsb">
+      <div class="products new_arivals">
         <div class="row justify-content-center">
           <!-- class="col-6 col-md-4 col-lg-3 col-xl-5col"  before class -->
           <div *ngFor="let product of filteredProducts" class="col-6 col-md-4 col-lg-3">

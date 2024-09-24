@@ -438,6 +438,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
     }
   }
 
+  
+  
   getAllproducts() {
     this.loaderService.showLoading();
     this.categoryService.getAllproducts().subscribe(
