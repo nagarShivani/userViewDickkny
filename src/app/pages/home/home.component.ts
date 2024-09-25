@@ -12,6 +12,8 @@ declare var $: any;
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
+  // productsToShow = -10; // Initially show 10 products
+  // | slice:0:productsToShow
   products: any[] = []; // Assume this is populated with your products
   filteredProducts: any[] = [];
   allCategory: any;
