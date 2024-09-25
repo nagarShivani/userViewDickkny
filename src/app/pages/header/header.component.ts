@@ -14,6 +14,7 @@ import { SerachService } from 'src/app/serach.service';
   styleUrls: ['./header.component.scss'],
 })
 
+
 export class HeaderComponent {
   searchQuery: string = '';
   searchTerm: string = '';  // Hold the search term

@@ -43,27 +43,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
-    width: 200px; /* Adjust width as necessary */
+    padding: 1px;
+  
+    width: 100px; /* Adjust width as necessary */
     // margin-left: 100px;
 }
 
 /* Style for input field inside the search wrapper */
 .header-7 .header-search-extended .header-search-wrapper input {
-    padding: 10px 15px;
+    padding: 5px 10px;
     height: auto;
     border: none;
     outline: none;
     flex-grow: 1;
     border-radius: 51px;
+    
 }
 
 /* Style for the search button */
 .header-7 .header-search-extended .header-search-wrapper button {
-    height: 40px;
+    height: 35px;
     background: #003e70;
     border-radius: 50%;
-    max-width: 40px;
+    // max-width: 20px;
     width: 40px;
     display: flex;
     align-items: center;
@@ -72,7 +74,9 @@
     padding: 0;
     border: none;
     cursor: pointer;
-    margin-bottom: 2px;
+    // margin-bottom: 2px;
+    margin:2px;
+    
 }
 
 /* Style for the search icon inside the button */
