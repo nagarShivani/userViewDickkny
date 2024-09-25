@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -20,6 +21,7 @@ export class ProductComponent implements OnInit {
   products: any;
   selectedMainImage: string | null = null; // Variable for the selected image
 
+  
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -28,17 +30,22 @@ export class ProductComponent implements OnInit {
     private categoryService: CategoryService
   ) {}
 
+
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.productId = params['id'];
       this.productDetails$ = this.getproductByID(this.productId);
+         // Call this method to load all products
+     this.getAllproducts();
     });
+  
   }
 
   // Method for handling the side image click
   onImageClick(image: string) {
     this.selectedMainImage = image; // Set the clicked image as the main image
   }
+
 
   getAllproducts() {
     this.loaderService.showLoading();
