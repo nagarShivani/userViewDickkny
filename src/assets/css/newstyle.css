@@ -236,7 +236,10 @@ blockquote {
   content: '\e81b'; }
 
 .owl-simple .owl-nav .owl-prev {
-  left: 0; }
+  left: 0;
+color: red;
+font-size: larger;
+font-weight: bolder; }
 .owl-simple .owl-nav .owl-next {
   right: 0; }
 

@@ -6,12 +6,29 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
 declare var $: any;
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
+export class HomeComponent implements AfterViewInit, OnDestroy{
+  translateX = 0;
+
+  nextSlide() {
+    if (this.translateX > -(this.products.length - 1) * 100) {
+      this.translateX -= 100;
+    }
+  }
+
+  prevSlide() {
+    if (this.translateX < 0) {
+      this.translateX += 100;
+    }
+  }
+
+
+  
   // productsToShow = -10; // Initially show 10 products
   // | slice:0:productsToShow
   products: any[] = []; // Assume this is populated with your products
@@ -48,20 +65,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
     this.getAllBlog();
   }
 
-  ngOnInit() {
-    this.getAllproducts();
-    this.searchService.searchQuery$.subscribe((query) => {
-      this.filteredProducts = this.filterProducts(query);
-    });
-  }
-  filterProducts(query: string): any[] {
-    if (!query) {
-      return this.products; // If no query, show all products
-    }
-    return this.products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-  }
   ngAfterViewInit() {
     this.sliderData();
 
@@ -77,243 +80,76 @@ export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
   }
 
 
-  initializeOwlCarousel() {
-    if ($('.owl-carousel').length) {
+initializeOwlCarousel() {
+  // General initialization for other carousels
+  if ($('.owl-carousel').length) {
       const $carousel = $('.owl-carousel');
       if ($carousel.data('owl.carousel')) {
-        $carousel.trigger('destroy.owl.carousel');
+          $carousel.trigger('destroy.owl.carousel');
       }
 
-      $carousel.owlCarousel({
+      // Initialize other carousels (without the specific ID)
+      $carousel.not('#trending-products-carousel').owlCarousel({
+          nav: true,
+          dots: false,
+          margin: 20,
+          loop: true,
+          responsive: {
+              0: { items: 2, margin: 10, dots: false, nav: true },
+              480: { items: 2, margin: 10, dots: false, nav: true },
+              768: { items: 4, nav: true, dots: false },
+              992: { items: 7, nav: true, dots: false },
+              1200: { items: 7, nav: true, dots: false },
+          },
+      });
+  }
+
+  // Specific initialization for the Trending Products carousel
+  if ($('#trending-products-carousel').length) {
+      const $trendingCarousel = $('#trending-products-carousel');
+      if ($trendingCarousel.data('owl.carousel')) {
+          $trendingCarousel.trigger('destroy.owl.carousel');
+      }
+
+      // Initialize the trending products carousel with 4 items for larger screens
+      $trendingCarousel.owlCarousel({
+          nav: true,
+          dots: false,
+          margin: 20,
+          loop: true,
+          responsive: {
+              0: { items: 2, margin: 10, dots: false, nav: true },
+              480: { items: 2, margin: 10, dots: false, nav: true },
+              768: { items: 2, nav: true, dots: false },
+              992: { items: 4, nav: true, dots: false },  // Set 4 items for larger screens
+              1200: { items: 4, nav: true, dots: false }, // Set 4 items for larger screens
+          },
+      });
+  }
+   // Specific initialization for the Trending Products carousel
+   if ($('#trending-blogs-carousel').length) {
+    const $blogCarousel = $('#trending-blogs-carousel');
+    if ($blogCarousel.data('owl.carousel')) {
+        $blogCarousel.trigger('destroy.owl.carousel');
+    }
+
+    // Initialize the blogs carousel with 4 items for larger screens
+    $blogCarousel.owlCarousel({
         nav: true,
         dots: false,
         margin: 20,
         loop: true,
         responsive: {
-          0: { items: 2, margin: 10, dots: false, nav: true },
-          480: { items: 2, margin: 10, dots: false, nav: true },
-          768: { items: 4, nav: true, dots: false },
-          992: { items: 4, nav: true, dots: false },
-          1200: { items: 4, nav: true, dots: false },
+            0: { items: 2, margin: 10, dots: false, nav: true },
+            480: { items: 2, margin: 10, dots: false, nav: true },
+            768: { items: 2, nav: true, dots: false },
+            992: { items: 4, nav: true, dots: false },  // Set 4 items for larger screens
+            1200: { items: 4, nav: true, dots: false }, // Set 4 items for larger screens
         },
-      });
-    }
+    });
+}
+}
 
-    // Initialize specific carousel for trending categories
-    // if ($('.trending-carousel').length) {
-    //   $('.trending-carousel').owlCarousel({
-    //     nav: true,
-    //     dots: false,
-    //     margin: 20,
-    //     loop: true,
-    //     responsive: {
-    //       0: { items: 4, margin: 10, dots: true, nav: false },
-    //       480: { items: 4, margin: 10, dots: true, nav: false },
-    //       768: { items: 6 },
-    //       992: { items: 6 },
-    //       1200: { items: 5, nav: true, dots: false },
-    //     },
-    //   });
-    // }
-  }
-
-  // sliderData() {
-  //   const trendingProducts = localStorage.getItem('trendingProducts');
-  //   if (trendingProducts) {
-  //     this.getTrendingProduct = JSON.parse(trendingProducts);
-  //     console.log('Trending Products', this.getTrendingProduct);
-  //   }
-  //   const allProducts = localStorage.getItem('allProducts');
-  //   if (allProducts) {
-  //     this.getAllProducts = JSON.parse(allProducts);
-  //     console.log('product sliders', this.getAllProducts);
-  //   }
-  //   const allBlogs = localStorage.getItem('allBlogDetails');
-  //   if (allBlogs) {
-  //     this.getAllBlogs = JSON.parse(allBlogs);
-  //   }
-  //   const allCategory = localStorage.getItem('allCategory');
-  //   if (allCategory) {
-  //     this.getAllCategories = JSON.parse(allCategory);
-  //   }
-  //   const allFeaturedProducts = localStorage.getItem('allFeaturedProducts');
-  //   if (allFeaturedProducts) {
-  //     this.allFeaturedProduct = JSON.parse(allFeaturedProducts);
-  //   }
-  // }
-  // new
-
-  // sliderData() {
-  //   // this.loaderService.showLoading();
-
-  //   this.categoryService.getAllCategory().subscribe(
-  //     (res: any) => {
-  //       console.log('get all category', res);
-  //       this.getAllCategories = res.data;
-  //       localStorage.setItem(
-  //         'allCategory',
-  //         JSON.stringify(this.getAllCategories)
-  //       );
-  //       this.initializeOwlCarousel(); // Initialize the carousel after data load
-  //       this.loaderService.hideLoading();
-  //     },
-  //     (error: any) => {
-  //       this.loaderService.hideLoading();
-  //       this.userService.toast.snackbarError(error.error.error);
-  //     }
-  //   );
-  //   // getProduct
-  //   // this.loaderService.showLoading();
-
-  //   // this.categoryService.getAllproducts().subscribe(
-  //   //   (res: any) => {
-  //   //     console.log('Get all Products response', res);
-  //   //     this.getAllProducts = res.data;
-  //   //     localStorage.setItem(
-  //   //       'allProducts',
-  //   //       JSON.stringify(this.getAllProducts)
-  //   //     );
-  //   //     // Optionally reinitialize carousel if products affect it
-  //   //     this.initializeOwlCarousel();
-  //   //   },
-  //   //   (error: any) => {
-  //   //     this.loaderService.hideLoading();
-  //   //     this.userService.toast.snackbarError(error.error.error);
-  //   //   }
-  //   // );
-  //   // Additional data fetching and storage
-  //   // Ensure to call initializeOwlCarousel() after setting data if needed
-  // }
-  // existing
-  // sliderData() {
-  //   this.loaderService.showLoading();
-
-  //   // Helper function to initialize the carousel
-  //   const initializeCarousel = () => {
-  //     this.initializeOwlCarousel();
-  //     this.loaderService.hideLoading();
-  //   };
-
-  //   // Check if data is available in local storagee and initialize carousel if so
-  //   const trendingProducts = localStorage.getItem('trendingProducts');
-  //   console.log('local strorage trending products', trendingProducts);
-  //   const allProducts = localStorage.getItem('allProducts');
-  //   console.log('local strorage  Products', allProducts);
-
-  //   const allBlogs = localStorage.getItem('allBlogDetails');
-  //   console.log('local strorage  Blogs', allBlogs);
-
-  //   const allCategory = localStorage.getItem('allCategory');
-  //   console.log('local strorage  Category', allCategory);
-
-  //   const allFeaturedProducts = localStorage.getItem('allFeaturedProducts');
-
-  //   if (
-  //     trendingProducts &&
-  //     allProducts &&
-  //     allBlogs &&
-  //     allCategory &&
-  //     allFeaturedProducts
-  //   ) {
-  //     this.getTrendingProduct = JSON.parse(trendingProducts);
-  //     this.getAllProducts = JSON.parse(allProducts);
-  //     this.getAllBlogs = JSON.parse(allBlogs);
-  //     this.getAllCategories = JSON.parse(allCategory);
-  //     this.allFeaturedProduct = JSON.parse(allFeaturedProducts);
-
-  //     console.log('slider Trending Products', this.getTrendingProduct);
-  //     console.log('Product Sliders', this.getAllProducts);
-  //     console.log('All Blogs slider', this.getAllBlogs);
-  //     console.log('All Categories sliders', this.getAllCategories);
-  //     console.log('Featured Products sliders', this.allFeaturedProduct);
-
-  //     initializeCarousel(); // Initialize carousel with local storage data
-  //   } else {
-  //     // Fetch missing data from the server
-  //     const requests: any[] = [];
-
-  //     // if (!trendingProducts) {
-  //     //   requests.push(
-  //     //     this.categoryService
-  //     //       .getTrendingProducts()
-  //     //       .toPromise()
-  //     //       .then((res: any) => {
-  //     //         this.getTrendingProduct = res.data;
-  //     //         localStorage.setItem(
-  //     //           'trendingProducts',
-  //     //           JSON.stringify(this.getTrendingProduct)
-  //     //         );
-  //     //       })
-  //     //   );
-  //     // }
-
-  //     if (!allProducts) {
-  //       requests.push(
-  //         this.categoryService
-  //           .getAllproducts()
-  //           .toPromise()
-  //           .then((res: any) => {
-  //             console.log('all product response', res);
-  //             this.getAllProducts = res.data;
-  //             localStorage.setItem(
-  //               'allProducts',
-  //               JSON.stringify(this.getAllProducts)
-  //             );
-  //           })
-  //       );
-  //     }
-
-  //     if (!allBlogs) {
-  //       requests.push(
-  //         this.categoryService
-  //           .getAllBlog()
-  //           .toPromise()
-  //           .then((res: any) => {
-  //             console.log('all blog response', res);
-
-  //             this.getAllBlogs = res.data;
-  //             localStorage.setItem(
-  //               'allBlogDetails',
-  //               JSON.stringify(this.getAllBlogs)
-  //             );
-  //           })
-  //       );
-  //     }
-
-  //     if (!allCategory) {
-  //       requests.push(
-  //         this.categoryService
-  //           .getAllCategory()
-  //           .toPromise()
-  //           .then((res: any) => {
-  //             console.log('all category response', res);
-
-  //             this.getAllCategories = res.data;
-  //             localStorage.setItem(
-  //               'allCategory',
-  //               JSON.stringify(this.getAllCategories)
-  //             );
-  //           })
-  //       );
-  //     }
-
-  //     // if (!allFeaturedProducts) {
-  //     //   requests.push(this.categoryService.getFeaturedProducts().toPromise().then((res: any) => {
-  //     //     this.allFeaturedProduct = res.data;
-  //     //     localStorage.setItem('allFeaturedProducts', JSON.stringify(this.allFeaturedProduct));
-  //     //   }));
-  //     // }
-
-  //     Promise.all(requests)
-  //       .then(() => {
-  //         initializeCarousel(); // Initialize carousel after all data has been fetched and stored
-  //       })
-  //       .catch((error: any) => {
-  //         this.loaderService.hideLoading();
-  //         this.userService.toast.snackbarError(error.error.error);
-  //       });
-  //   }
-  // }
 
   sliderData() {
     this.loaderService.showLoading();
@@ -450,7 +286,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy,OnInit{
       (res: any) => {
         console.log('Get all Products response', res);
         this.products = res.data;
-        this.filteredProducts = this.products;
+        // this.filteredProducts = this.products;
         console.log('products', this.products);
         localStorage.setItem('allProducts', JSON.stringify(this.products));
         this.loaderService.hideLoading();
