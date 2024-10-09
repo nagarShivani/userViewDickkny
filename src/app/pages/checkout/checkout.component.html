@@ -15,11 +15,7 @@
     <div class="checkout">
       <div class="container-fluid">
         <div class="checkout-discount">
-          <!-- <form action="#">
-                        <input type="text" class="form-control" [(ngModel)]="applycoupon" [ngModelOptions]="{ standalone: true }" required id="checkout-discount-input">
-                        <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
-                        <button type="submit" (click)="applyCoupon(applycoupon)" class="btn btn-primary">Apply Coupon</button>
-                    </form> -->
+      
           <form action="#">
             <input
               type="text"
@@ -92,20 +88,7 @@
         <form action="#">
           <div class="row">
             <div *ngIf="showAddAddressForm" class="col-lg-9">
-              <!-- <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>First Name *</label>
-                                        <input type="text" [(ngModel)]="userDetails.firstName"  [ngModelOptions]="{ standalone: true }"  class="form-control" required>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label>Last Name *</label>
-                                        <input type="text" [(ngModel)]="userDetails.firstName"  [ngModelOptions]="{ standalone: true }"  class="form-control" required>
-                                    </div>
-                                </div> -->
-
-              <!-- <label>Country *</label>
-                                <input type="text" class="form-control" [(ngModel)]="userDetails.country"  [ngModelOptions]="{ standalone: true }"  required> -->
+              
 
               <label>Street address *</label>
               <input
@@ -188,21 +171,7 @@
                 </div>
               </div>
 
-              <!-- <label>Email address *</label>
-                                <input type="email" class="form-control" required> -->
-
-              <!-- <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
-                                    <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
-                                </div> -->
-
-              <!-- <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a different address?</label>
-                                </div> -->
-
-              <!-- <label>Order notes (optional)</label> -->
-              <!-- <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea> -->
+            
             </div>
             <!-- End .col-lg-9 -->
             <aside class="col-lg-3">
@@ -211,23 +180,9 @@
                 <!-- End .summary-title -->
 
                 <table class="table table-summary">
-                  <!-- <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead> -->
-
+                 
                   <tbody>
-                    <!-- <tr>
-                                            <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                            <td>₹84.00</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                            <td>₹76,00</td>
-                                        </tr> -->
+                   
                     <tr class="summary-subtotal">
                       <td>Subtotal:</td>
                       <td>₹ {{ subTotal ? subTotal : 0 }}</td>
@@ -289,19 +244,7 @@
                   </div>
                   <!-- End .card -->
 
-                  <!-- <div class="card">
-                                        <div class="card-header" id="heading-3">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                                                    Cash on delivery
-                                                </a>
-                                            </h2>
-                                        </div>
-                                        <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
-                                            <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. 
-                                            </div>
-                                        </div>
-                                    </div> -->
+                  
                 </div>
                 <!-- End .accordion -->
 
