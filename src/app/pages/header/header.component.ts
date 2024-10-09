@@ -19,7 +19,7 @@ export class HeaderComponent {
   searchQuery: string = '';
   searchTerm: string = '';  // Hold the search term
 
-  // searchResults$: Observable<any[]> | undefined; 
+ 
 searchResults: any[] = [];  // Hold the search results
   isLoggedInObject: any;
   keyword: string = '';
@@ -73,17 +73,6 @@ searchResults: any[] = [];  // Hold the search results
       }
     );
   }
-  // getAllProducts() {
-  //   this.categoryService.getAllproducts().subscribe(
-  //     (res: any) => {
-  //       this.allProducts = res.data;
-  //       this.filteredProducts = this.allProducts;  // Initially, display all products
-  //     },
-  //     (error: any) => {
-  //       console.error('Error fetching products:', error);
-  //     }
-  //   );
-  // }
 
 
   getIsLoggedInObject() {
