@@ -36,111 +36,10 @@
         </nav>
 
         
-        <!-- commenting Nav bar  -->
-        <!-- <nav class="main-nav">
-
-          <ul class="menu sf-arrows">
-            <li>
-              <a routerLink="/home" class="cursor-pointer">Home</a>
-            </li>
-
-            <li *ngFor="let category of allCategory">
-              <a
-                routerLink="/product-list/{{ category._id }}"
-                class="cursor-pointer"
-                >{{ category.name }}</a
-              >
-            </li>
-          <li>
-                            <a href="#" class="">Joggers </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">Shorts </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">Capri </a>
-                        </li> -->
-        <!-- <li>
-                            <a href="#" class="sf-with-ul">Jeans </a>
-
-                            <ul>
-                                <li><a href="#">Wide lag Fit</a></li>
-                                <li><a href="#"> Skinny Fit  </a></li>
-                                <li><a href="#">Boot-leg Fit </a></li>
-                                <li><a href="#">Straight Fit      </a></li>
-                                <li><a href="#">Cargo Fit </a></li>
-                                <li><a href="#">Formal Fit </a></li>
-                            </ul>
-                        </li> -->
-        <!-- </ul> -->
-        <!-- End .menu -->
-        <!-- </nav> -->
-
-        <!-- End .main-nav -->
+   
       </div>
 
-      <!-- End .header-left -->
-      <!-- header  -->
-      <!-- <div class="header-7 ">
-        <input
-        type="text"
-        [(ngModel)]="searchQuery"
-        (input)="onSearch()"
-        placeholder="Search products..."
-      />
- 
-      </div> -->
 
-      
-      <!-- <div class="header-7">
-        <div class="header-search header-search-extended header-search-visible">
-          <a href="#" class="search-toggle" role="button">
-            <i class="icon-search"></i>
-          </a>
-          <form action="#" method="get">
-
-            <div class="header-search-wrapper search-wrapper-wide">
-              <label for="q" class="sr-only">Search</label>
-              <input
-                type="search"
-                class="form-control"
-                [(ngModel)]="searchResult"
-                (ngModelChange)="searchProducts(searchResult)"
-                [ngModelOptions]="{ standalone: true }"
-                name="q"
-                id="q"
-                placeholder="Search product ..."
-                required
-              />
-              <button
-                (click)="search(searchResult)"
-                class="btn btn-primary"
-                type="submit"
-              >
-                <i class="icon-search"></i>
-              </button>
-              <div *ngFor="let product of searchResults" class="search-results">
-                <p>{{ product.name }}</p>
-                <ul>
-                  <li *ngFor="let product of searchResults">
-                    {{ product.name }}
-                  </li>
-                </ul>
-              </div>
-              <div *ngFor="let product of searchResults" class="product-card">
-                <p>{{ product.name }}</p>
-                </div>
-              
-          
-              <div *ngIf="searchResults?.length === 0 && searchResult">
-                <p>No results found</p>
-              </div>
-            </div>
-          </form>
-
-        
-        </div>
-      </div> -->
       <div class="header-right">
         <div class="header-search header-search-extended header-search-visible">
           <a href="#" class="search-toggle" role="button">
@@ -217,35 +116,7 @@
             }}</span>
           </a>
 
-          <!-- <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-cart-products">
-                            <div class="product">
-                                <div class="product-cart-details">
-                                    <h4 class="product-title">
-                                        <a  routerLink="/product">Blue utility pinafore denim Jeans</a>
-                                    </h4>
-                                    <span class="cart-product-info">
-                                        <span class="cart-product-qty">1</span>
-                                        x   76.00
-                                    </span>
-                                </div>
-                                <figure class="product-image-container">
-                                    <a  routerLink="/product" class="product-image">
-                                        <img src="assets/images/products/jea5.JPG" alt="product">
-                                    </a>
-                                </figure>
-                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                            </div>
-                        </div>
-                        <div class="dropdown-cart-total">
-                            <span>Total</span>
-                            <span class="cart-total-price">76.00</span>
-                        </div>
-                        <div class="dropdown-cart-action">
-                            <a routerLink="/cart" class="btn btn-primary">View Cart</a>
-                            <a routerLink="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                        </div>
-                    </div> -->
+     
         </div>
         <!-- End .cart-dropdown -->
       </div>
