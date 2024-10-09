@@ -80,15 +80,7 @@
               <h1 class="product-title">
                 {{ (productDetails$ | async)?.name }}
               </h1>
-              <!-- End .product-title -->
-
-              <!-- <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                </div>
-                                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-                            </div> -->
-              <!-- <div class="product-price">₹{{ productDetails?.price }}</div> -->
+       
               <div class="product-price">
                 ₹{{ (productDetails$ | async)?.salePrice }}
               </div>
@@ -99,35 +91,11 @@
               </div>
               <!-- End .product-content -->
 
-              <!-- <div class="details-filter-row details-row-size">
-                                <label>Color:</label>
-
-                                <div class="product-nav product-nav-thumbs">
-                                    <a  class="active">
-                                        <img src="assets/images/jeansi.svg" alt="product desc">
-                                    </a>
-                                    <a >
-                                        <img src="assets/images/jeansi3.svg" alt="product desc">
-                                    </a>
-                                </div>
-                            </div> -->
+ 
 
               <div class="details-filter-row details-row-size">
                 <label for="size">Size:</label>
-                <!-- <div
-                  *ngIf="productDetails?.size?.length > 0"
-                  class="product-nav product-nav-thumbs"
-                >
-                  <div
-                    *ngFor="let productSize of productDetails.size"
-                    class="size-button"
-                    [ngClass]="{ active: productSize === selectedSize }"
-                  >
-                    <button (click)="selectSize(productSize)">
-                      {{ productSize.size }}
-                    </button>
-                  </div>
-                </div> -->
+     
                 <div
                   *ngIf="(productDetails$ | async)?.size?.length > 0"
                   class="product-nav product-nav-thumbs"
@@ -143,15 +111,7 @@
                   </div>
                 </div>
 
-                <!-- <div *ngIf="productDetails.size.length > 0" class="select-custom">
-                                    <select name="size" id="size" class="form-control">
-                                        <option value="#" selected="selected">Select a size</option>
-                                        <option *ngFor="let size of productDetails.size" value="{{size.size}}">{{size.size}}</option>
-                                        <option value="m">Medium</option>
-                                        <option value="l">Large</option>
-                                        <option value="xl">Extra Large</option>
-                                    </select>
-                                </div> -->
+         
                 <button
                   type="button"
                   class="size-guide"
@@ -261,11 +221,7 @@
               </div>
 
               <div class="product-details-action cursor-pointer">
-                <!-- <a
-                  (click)="addToCart(productDetails._id)"
-                  class="btn-product btn-cart"
-                  ><span>Add to cart </span></a
-                > -->
+      
                 <!-- add to cart  -->
                 <a
                   *ngIf="productDetails$ | async as productDetails"
@@ -276,12 +232,7 @@
                 </a>
 
                 <div class="details-action-wrapper cursor-pointer">
-                  <!-- <a
-                    (click)="addToWishlist(productDetails._id)"
-                    class="btn-product btn-wishlist"
-                    title="Wishlist"
-                    ><span>Add to Wishlist</span></a
-                  > -->
+         
                   <!-- wishlist  -->
                   <a
                     *ngIf="productDetails$ | async as productDetails"
@@ -332,9 +283,7 @@
                     target="_blank"
                     ><i class="icon-instagram"></i
                   ></a>
-                  <!-- <a class="social-icon" title="Pinterest" target="_blank"
-                    ><i class="icon-pinterest"></i
-                  ></a> -->
+             
                 </div>
               </div>
               <!-- End .product-details-footer -->
