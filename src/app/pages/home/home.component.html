@@ -1,5 +1,6 @@
 <app-newsletter></app-newsletter>
 <div class="page-wrapper">
+ 
   <main class="main">
     <div class="container">
       <div class="topsb">
@@ -111,13 +112,14 @@
     <!-- featured  -->
 
     <!-- End .bg-light-2 pt-4 pb-4 -->
-    <div id="trending-products-carousel" class="banner-group-1 product_news mt-5 mb-5 mt-4" style="margin-top:20px;">
+    <div class="banner-group-1 product_news mt-5 mb-5 mt-4">
       <h2 class="title text-center mb-2">Trending Products</h2>
       <div class="container">
-        <div class="owl-item owl-carousel trending-carousel owl-simple" data-toggle="owl" data-owl-options='{
+        <div id = "trending-blogs-carousel" class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+          data-owl-options='{
                                     "nav": true, 
                                     "dots": true,
-                                    "margin": 10,
+                                    "margin": 20,
                                     "loop": true,
                                     "responsive": {
                                         "0": {
@@ -136,47 +138,71 @@
                                         }
                                     }
                                 }'>
-          <div style = "margin-top: 30px;"*ngFor="let product of getTrendingProduct" class="product product-7">
-            <div class="card mb-3" style="  border: 4px solid #e6e6e6;">
-              <div class="row g-0">
-                <div class="col-md-7 ">
-                  <span *ngIf="product.tag" class="product-label label-sale">{{ product.tag }}</span>
+          <div style="margin:10px" *ngFor="let product of getTrendingProduct" class="product product-7">
+            <figure class="product-media">
+              <span *ngIf="product.tag" class="product-label label-sale">{{
+                product.tag
+                }}</span>
+              <a routerLink="/product/{{ product._id }}">
+                <img src="{{ product.image }}" alt="Product image" class="product-image" />
+                <img *ngIf="product.multipleimage.length > 0" src="{{ product.multipleimage[0] }}" alt="Product image"
+                  class="product-image-hover" />
+              </a>
 
-                  <!-- Product Image and Link -->
-                  <a routerLink="/product/{{ product._id }}" class="product-link">
-                    <div class="product-media">
-                      <!-- Primary Product Image -->
-                      <img  src="{{ product.image }}" alt="Product image" class="product-image" />
-
-                      <!-- Hover Image (If Available) -->
-                      <img *ngIf="product.multipleimage.length > 0" src="{{ product.multipleimage[0] }}"
-                        alt="Product image" class="product-image-hover" />
-                    </div>
-                  </a>
-                </div>
-                <div class="col-md-5">
-                  <div class="card-body">
-                    <!-- Product Title (Outside the image frame) -->
-                    <h5 class="product-title">
-                      <a routerLink="/product/{{ product._id }}">{{ product.name }}</a>
-                    </h5>
-
-                    <!-- Product Price (Outside the image frame) -->
-                    <div class="product-price">
-                      <span class="new-price">₹{{ product.salePrice }}</span>
-                      <span *ngIf="product.price" class="old-price">₹{{ product.price }}</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="product-action-vertical cursor-pointer">
+                <a (click)="addToWishlist(product._id)" class="btn-product-icon btn-wishlist btn-expandable"><span>add
+                    to wishlist</span></a>
               </div>
+              <!-- End .product-action-vertical -->
+
+              <div class="product-action cursor-pointer">
+                <a (click)="addToCart(product._id)" class="btn-product btn-cart"><span>add to cart</span></a>
+              </div>
+              <!-- End .product-action -->
+            </figure>
+            <!-- End .product-media -->
+
+            <div class="product-body">
+              <h3 class="product-title">
+                <a routerLink="/product">{{ product.name }}</a>
+              </h3>
+              <!-- End .product-title -->
+              <div class="product-price">
+                <span class="new-price">Now ₹{{ product.salePrice }}</span>
+                <span *ngIf="product.price" class="old-price">Was ₹{{ product.price }}</span>
+              </div>
+              <!-- End .product-price -->
+              <!-- <div
+                *ngIf="product.size.length > 0"
+                class="product-nav product-nav-thumbs"
+              >
+                <div
+                  *ngFor="let productSize of product.size"
+                  class="size-button"
+                  [ngClass]="{
+                    active: sizeSelected && productSize === selectedSize
+                  }"
+                >
+                  <button (click)="selectSize(productSize)">
+                    {{ productSize.size }}
+                  </button>
+                </div>
+              </div> -->
+
+              <!-- <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 100%;"></div>
+                            </div>
+                            <span class="ratings-text">( 6 Reviews )</span>
+                        </div> -->
             </div>
+            <!-- End .product-body -->
           </div>
-
-
           <!-- End .product -->
         </div>
       </div>
     </div>
+
 
 
     <div class="container four_section mt-5">
@@ -510,6 +536,7 @@
             <span class="icon-box-icon text-dark">
               <i class="icon-life-ring"></i>
             </span>
+
 
             <div class="icon-box-content">
               <h3 class="icon-box-title">We Support</h3>

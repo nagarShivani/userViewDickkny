@@ -194,3 +194,11 @@ background-color: #f0f0f0; /* Change to your hover background color */
 .next-btn {
   right: 10px;
 }
+
+
+.product_news figure.product-media > a img {
+  width: 100%;
+  height: 330px;
+  object-fit: contain;
+  object-position: bottom;
+}

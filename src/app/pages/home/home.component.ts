@@ -70,6 +70,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy{
 
     // this.initializeOwlCarousel();
   }
+
+
   ngOnDestroy() {
     // Clean up carousel when the component is destroyed
     if ($('.owl-carousel').data('owl.carousel')) {
@@ -104,29 +106,8 @@ initializeOwlCarousel() {
       });
   }
 
-  // Specific initialization for the Trending Products carousel
-  if ($('#trending-products-carousel').length) {
-      const $trendingCarousel = $('#trending-products-carousel');
-      if ($trendingCarousel.data('owl.carousel')) {
-          $trendingCarousel.trigger('destroy.owl.carousel');
-      }
 
-      // Initialize the trending products carousel with 4 items for larger screens
-      $trendingCarousel.owlCarousel({
-          nav: true,
-          dots: false,
-          margin: 20,
-          loop: true,
-          responsive: {
-              0: { items: 2, margin: 10, dots: false, nav: true },
-              480: { items: 2, margin: 10, dots: false, nav: true },
-              768: { items: 2, nav: true, dots: false },
-              992: { items: 4, nav: true, dots: false },  // Set 4 items for larger screens
-              1200: { items: 4, nav: true, dots: false }, // Set 4 items for larger screens
-          },
-      });
-  }
-   // Specific initialization for the Trending Products carousel
+   // Specific initialization for the Blog  carousel
    if ($('#trending-blogs-carousel').length) {
     const $blogCarousel = $('#trending-blogs-carousel');
     if ($blogCarousel.data('owl.carousel')) {
@@ -148,6 +129,29 @@ initializeOwlCarousel() {
         },
     });
 }
+   // Specific initialization for the content  carousel
+   if ($('#trending-content-carousel').length) {
+    const $contentCarousel = $('#trending-content-carousel');
+    if ($contentCarousel.data('owl.carousel')) {
+        $contentCarousel.trigger('destroy.owl.carousel');
+    }
+
+    // Initialize the blogs carousel with 4 items for larger screens
+    $contentCarousel.owlCarousel({
+        nav: true,
+        dots: false,
+        margin: 20,
+        loop: true,
+        responsive: {
+            0: { items: 2, margin: 10, dots: false, nav: true },
+            480: { items: 2, margin: 10, dots: false, nav: true },
+            768: { items: 2, nav: true, dots: false },
+            992: { items: 4, nav: true, dots: false },  // Set 4 items for larger screens
+            1200: { items: 4, nav: true, dots: false }, // Set 4 items for larger screens
+        },
+    });
+}
+
 }
 
 
