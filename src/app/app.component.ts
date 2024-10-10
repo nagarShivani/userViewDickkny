@@ -17,11 +17,7 @@ import { UserService } from './services/user/user.service';
 })
 
 export class AppComponent implements OnInit {
-  // searchResults: any[] = [];
-
-  // onSearchResults(results: any[]): void {
-  //   this.searchResults = results;
-  // }
+ 
 
   searchTerm: string = '';  // This stores the search term from the header
 
