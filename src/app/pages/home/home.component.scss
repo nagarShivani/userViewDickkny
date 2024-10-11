@@ -201,7 +201,10 @@ background-color: #f0f0f0; /* Change to your hover background color */
   height: 330px;
   object-fit: contain;
   object-position: bottom;
-  border: 2px solid rgb(0, 62, 112);
+  // border: 2px solid rgb(0, 62, 112);
+  border: 1px solid black;
+
   border-radius: 10px;
 
 }
+
